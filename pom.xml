@@ -94,7 +94,7 @@
                     </httpConnector>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
                     <webAppConfig>
-                        <!--defaultsDescriptor></defaultsDescriptor-->
+                        <!--defaultsDescriptor>src/test/resources/jetty-maven-plugin-webdefault.xml</defaultsDescriptor-->
                     </webAppConfig>
                 </configuration>
             </plugin>
