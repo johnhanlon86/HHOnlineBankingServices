@@ -6,5 +6,15 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
+        // ***To be updated with Online Banking Services URL.
+        <form action ="http://localhost:49000/api/mortgagecalc/payment" method ="get" id ="form1">
+            Principal :<br> <input type = "text" name = "principal" value ="200000"> <br> 
+            Interest Rate:<br><input type="text" name = "interest" value ="4.5"> <br>
+            Loan Term:<br> <input type ="text" name ="term" value ="10"> <br>
+        </form>
+        
+        <button type ="submit" form="form1" value ="Submit">Submit</button >
+        
     </body>
 </html>
