@@ -1,14 +1,15 @@
 package com.mycompany.onlinebankingservices.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Transaction {
 
-    private String transactionId;
+    // ** Change transationId to type UUID **
+    private UUID transactionId;
     private double transactionAmount;
     private Date transactionDate;
     private String description;
-
     /*
     I have changed 'accountType' back to String ->
     Transaction t1 = new Transaction("Debit", 100);
@@ -22,6 +23,7 @@ public class Transaction {
     // ** Added'preTransactionBalance' to the constructors **
     // ** Removed transactionAmount **
     public Transaction(String accountType, double preTransactionBalance) {
+        transactionId = UUID.randomUUID();
         this.accountType = accountType;
         this.preTransactionBalance = preTransactionBalance;
         transactionDate = new Date();
@@ -30,6 +32,7 @@ public class Transaction {
     // ** Added'preTransactionBalance' to the constructors **
     // ** Removed transactionAmount **
     public Transaction(String accountType, double preTransactionBalance, String description) {
+        transactionId = UUID.randomUUID();
         this.accountType = accountType;
         this.preTransactionBalance = preTransactionBalance;
         this.description = description;
@@ -38,7 +41,7 @@ public class Transaction {
 
     // ** Changed return accountType to double: postTransactionBalance **
     public double deposit(double depositAmount) {
-
+        transactionAmount = depositAmount;
         postTransactionBalance = preTransactionBalance + depositAmount;
         return postTransactionBalance;
     }
@@ -50,23 +53,21 @@ public class Transaction {
 
             // Do not let balance go minus
             if (preTransactionBalance >= withdrawAmount) {
+                transactionAmount = withdrawAmount;
                 postTransactionBalance = preTransactionBalance - withdrawAmount;
             }
         }
 
         if (accountType.equalsIgnoreCase("credit")) {
+            transactionAmount = withdrawAmount;
             postTransactionBalance = preTransactionBalance - withdrawAmount;
         }
 
         return postTransactionBalance;
     }
 
-    public String getTransactionId() {
+    public UUID getTransactionId() {
         return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
     }
 
     public Date getTransactionDate() {
@@ -112,9 +113,10 @@ public class Transaction {
     @Override
     public String toString() {
 
-        String transactionDetails = "TransactionId: " + transactionId + "Transaction Amount: "
-                + transactionAmount + "Transaction Date: " + transactionDate + "Description: "
-                + description + "Account Type: " + accountType + "Pre-Transaction Balance: " + preTransactionBalance + "Post-Transaction Balance: " + postTransactionBalance;
+        String transactionDetails = "TransactionId: " + transactionId + "\nTransaction Amount: "
+                + transactionAmount + "\nTransaction Date: " + transactionDate + "\nDescription: "
+                + description + "\nAccount Type: " + accountType + "\nPre-Transaction Balance: " 
+                + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance;
 
         return transactionDetails;
     }
