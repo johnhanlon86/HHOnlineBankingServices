@@ -83,6 +83,21 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.4.v20141103</version>
+                <configuration>
+                    <httpConnector>
+                        <host>127.0.0.1</host>
+                        <port>49000</port>
+                    </httpConnector>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <webAppConfig>
+                        <!--defaultsDescriptor></defaultsDescriptor-->
+                    </webAppConfig>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
