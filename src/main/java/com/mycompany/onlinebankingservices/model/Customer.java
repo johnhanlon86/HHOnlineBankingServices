@@ -1,11 +1,12 @@
 package com.mycompany.onlinebankingservices.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.lang.Math;
 
 public class Customer {
 
-    private int customerID;
+    private double customerID;
+    private double randomNumber;
     private String firstName;
     private String secondName;
     private String emailAddress;
@@ -32,9 +33,16 @@ public class Customer {
         this.emailAddress = emailAddress;
         this.password = password;
         this.locationAddress = locationAddress;
-        this.customerID = customerID++;
+        this.customerID = generateNewCustomerID();
     }
 
+    public double generateNewCustomerID(){
+        for(int i = 1; i <= 2; i++) {
+        double randomNumber = Math.random();
+        }
+        return randomNumber;
+    }
+    
     public void openAccount(int customerID, Account account) {
         accountsList.add(account);       
         System.out.println("You have created a new account - CustomerID: " + customerID);
