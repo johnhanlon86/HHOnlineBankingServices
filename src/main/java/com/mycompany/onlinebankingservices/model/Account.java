@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class Account {
     private int customerID;
     private int accountNumber;
+    private String transactionType;
+    private double transactionAmount;
+    private String description;
+    private int senderAccountNumber;
+    private int receiverAccountNumber;
     private double balance;
     private String accountType;
     private String sortCode;
@@ -18,10 +23,26 @@ public class Account {
         this.sortCode = sortCode;
     }
 
-    public Transaction makeTransaction(String transactionType, double transactionAmount, String description) {
+    public Transaction makeTransaction(String transactionType, double transactionAmount, String description, Transaction transaction) {
+        this.transactionType = transactionType;
+        this.transactionAmount = transactionAmount;
+        this.description = description;
+        transactionList.add(transaction);
 
-        Transaction transaction = null;
+        // Transaction transaction = null;
+        // LOGIC here
+        return transaction;
+    }
 
+    public Transaction makeTransfer(String transactionType, double transactionAmount, String description, int senderAccountNumber, int receiverAccountNumber, Transaction transaction) {    
+        this.transactionType = transactionType;
+        this.transactionAmount = transactionAmount;
+        this.description = description;
+        this.senderAccountNumber = senderAccountNumber;
+        this.receiverAccountNumber = receiverAccountNumber;
+        transactionList.add(transaction);
+
+        // Transaction transaction = null;
         // LOGIC here
         return transaction;
     }
