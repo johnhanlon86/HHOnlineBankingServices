@@ -41,6 +41,14 @@ public class Account {
         this.balance = balance;
     }
 
+    public boolean isBalanceZero() {
+        boolean isZero = false;
+        if (getBalance() == 0) {
+            isZero = true;
+        }
+        return isZero;
+    }
+
     public String getAccountType() {
         return accountType;
     }
