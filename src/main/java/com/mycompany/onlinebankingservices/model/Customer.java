@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 public class Customer {
 
+    private int customerID;
     private String firstName;
     private String secondName;
     private String emailAddress;
@@ -22,6 +23,7 @@ public class Customer {
         this.secondName = secondName;
         this.emailAddress = emailAddress;
         this.password = password;
+        this.customerID = customerID++;
     }
 
     public Customer(String firstName, String secondName, String emailAddress, String password, String locationAddress) {
@@ -30,15 +32,15 @@ public class Customer {
         this.emailAddress = emailAddress;
         this.password = password;
         this.locationAddress = locationAddress;
+        this.customerID = customerID++;
     }
 
-    public void openAccount(String accountType, int accountNumber, double openingBalance, String sortCode) {
-        this.accountType = accountType;
-        this.accountNumber = accountNumber;
-        this.openingBalance = 0;
-        this.sortCode = sortCode;
+    public void openAccount(int customerID, Account account) {
+        accountsList.add(account);       
+        System.out.println("You have created a new account - CustomerID: " + customerID);
     }
-
+    
+    // ADD TO METHOD IN ERD: Parameter ArrayList<Account> accountsList.
     public void closeAccount(int accountNumber, ArrayList<Account> accountsList) {
         this.accountsList = accountsList;
         this.accountNumber = accountNumber;

@@ -3,14 +3,15 @@ package com.mycompany.onlinebankingservices.model;
 import java.util.ArrayList;
 
 public class Account {
-
+    private int customerID;
     private int accountNumber;
     private double balance;
     private String accountType;
     private String sortCode;
     private ArrayList<Transaction> transactionList;
 
-    public Account(int accountNumber, double openingBalance, String accountType, String sortCode) {
+    public Account(int customerID, int accountNumber, double openingBalance, String accountType, String sortCode) {
+        this.customerID = customerID;
         this.accountNumber = accountNumber;
         this.balance = openingBalance;
         this.accountType = accountType;
