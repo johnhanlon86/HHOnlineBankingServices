@@ -30,7 +30,7 @@ public class CustomerTests {
         System.out.println("");
         System.out.println("Open account with following details..");
         System.out.println("Account Number: 3333, Balance: 1000, AccountType: Credit, SortCode: HH1234");
-        customer01.openAccount("Credit", 3333, 10000, "HH1234");
+        customer01.openAccount("Credit", 3333, 1000, "HH1234");
 
         System.out.println("");
         System.out.println("*Display All Customer Accounts*: ");

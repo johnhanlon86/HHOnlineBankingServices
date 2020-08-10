@@ -9,7 +9,8 @@ public class Customer {
     // Changed to static and int.
     // We could implement UUID numbers instead, see transactionID in transaction
     // class. 
-    private static double customerID;
+    private static int customerIDStatic;
+    private int customerID;
 
     // By chance of randomness customers could have the same 'customerId'?
     //private double randomNumber;
@@ -32,7 +33,7 @@ public class Customer {
         this.secondName = secondName;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.customerID = customerID++;
+        this.customerID = customerIDStatic++;
     }
 
     public Customer(String firstName, String secondName, String emailAddress, String password, String locationAddress) {
@@ -41,7 +42,7 @@ public class Customer {
         this.emailAddress = emailAddress;
         this.password = password;
         this.locationAddress = locationAddress;
-        this.customerID = customerID++;
+        this.customerID = customerIDStatic++;
 
         // By chance of randomness customers could have the same 'customerId'?
         //this.customerID = generateNewCustomerID();
@@ -132,6 +133,11 @@ public class Customer {
         }
     }
      */
+    
+    public int getCustomerID(){
+        return customerID;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
