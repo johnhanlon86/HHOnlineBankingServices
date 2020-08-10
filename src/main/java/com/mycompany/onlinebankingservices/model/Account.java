@@ -11,6 +11,9 @@ public class Account {
     //private String description;
     //private int senderAccountNumber;
     //private int receiverAccountNumber;
+    
+    // Perhaps we should assign accountNumbers automatically? Reduces chance of
+    // duplicate account numbers between customers.
     private int accountNumber;
     private double balance;
     private String accountType;
