@@ -7,6 +7,7 @@ import com.mycompany.onlinebankingservices.model.Customer;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,15 +34,18 @@ public class BankResource {
         Gson gson = new Gson();
         List<Customer> customersList = bankService.createPastCustomers();
         return Response.status(Response.Status.CREATED).entity(gson.toJson(customersList)).build();
-         
     }
 
     // ******** ACCOUNT *******
+    // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
+    // http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe
     @GET
-    @Path("/getaccountdetails/{customerId}/{accountNumber}/{accountPassword}")
-    public Account getAccountDetails() {
-        Account account = null;
-        return account;
+    @Path("/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAccountDetails(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+        Gson gson = new Gson();
+        Account account = bankService.getAccountDetails(customerId, accountNumber, customerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(account)).build();
     }
 
 }

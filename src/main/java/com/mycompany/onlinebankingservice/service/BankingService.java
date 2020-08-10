@@ -1,5 +1,6 @@
 package com.mycompany.onlinebankingservice.service;
 
+import com.mycompany.onlinebankingservices.model.Account;
 import com.mycompany.onlinebankingservices.model.Customer;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,4 +40,40 @@ public class BankingService {
 
         return bankService;
     }
+    
+    // ******** ACCOUNT *******
+    public Account getAccountDetails(int customerId, int accountNumber, String customerPassword) {
+        
+        Account account = null;
+
+        for (int i = 0; i < bankService.size(); i++) {
+            if (bankService.get(i).getCustomerID() == customerId && bankService.get(i).getPassword().equals(customerPassword)) {
+                for (int j = 0; j < bankService.get(i).getAccountsList().size(); j++) {
+
+                    if (bankService.get(i).getAccountsList().get(j).getAccountNumber() == accountNumber) {
+                        account = bankService.get(i).getAccountsList().get(j);
+
+                    }
+                }
+            }
+        }
+
+        return account;
+    }
+    
+    private boolean checkSecurityDetials(int customerId, String customerPassword) {
+        boolean isAbleToProceed = false;
+
+        for (int i = 0; i < bankService.size(); i++) {
+            if (bankService.get(i).getCustomerID() == customerId && bankService.get(i).getPassword().equals(customerPassword)) {
+                isAbleToProceed = true;
+            }
+        }
+
+        return isAbleToProceed;
+    }
+    
+   
+
+
 }
