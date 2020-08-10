@@ -30,7 +30,26 @@ public class Account {
         this.accountType = accountType;
         this.sortCode = sortCode;
     }
+  
+    // ** NEW METHOD - ADD to ERD **
+    public Transaction deposit(double depositAmount, String description) {
 
+        Transaction transaction = new Transaction(accountType, balance, description);
+        balance = transaction.deposit(depositAmount);
+        transactionList.add(transaction);
+        return transaction;
+    }
+
+    // ** NEW METHOD - ADD to ERD **
+    public Transaction withdraw(double withdrawAmount, String description) {
+
+        Transaction transaction = new Transaction(accountType, balance, description);
+        balance = transaction.withdraw(withdrawAmount);
+        transactionList.add(transaction);
+        return transaction;
+    }
+    
+    /*
     // No need to pass a transaction object into ().
     // Create within the method instead.
     public Transaction makeTransaction(String transactionType, double transactionAmount, String description) {
@@ -56,6 +75,7 @@ public class Account {
 
         return transaction;
     }
+    */
 
     /*
     // This functionality was added into the 'BankService' class instead when
