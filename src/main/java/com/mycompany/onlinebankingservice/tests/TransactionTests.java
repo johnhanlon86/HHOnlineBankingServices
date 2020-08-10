@@ -66,11 +66,9 @@ public class TransactionTests {
         Transaction transaction05 = new Transaction("Debit", 1000);
 
         System.out.println("Withdraw 2000 euro..");
-        transaction05.withdraw(2000);
-
         System.out.println("Note: debit account so expecting no change (debit ccount cannot go minus)");
         System.out.println("Expected 'Post-Transaction Balance': 1000.0 ");
-        System.out.println("Actual: " + transaction05.getPostTransactionBalance());
+        System.out.println("Actual: " + transaction05.withdraw(2000));
 
         
         

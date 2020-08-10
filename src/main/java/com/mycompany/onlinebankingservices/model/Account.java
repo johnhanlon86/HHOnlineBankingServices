@@ -15,7 +15,7 @@ public class Account {
     private double balance;
     private String accountType;
     private String sortCode;
-    private ArrayList<Transaction> transactionList;
+    private ArrayList<Transaction> transactionList = new ArrayList<>();
 
     // No need to have a customerId in the account class ->
     // The customer will have an account. The account has an accountNumber.
@@ -41,14 +41,12 @@ public class Account {
 
         if (transactionType.equalsIgnoreCase("Deposit")) {
             transaction = new Transaction(accountType, balance, description);
-
             balance = transaction.deposit(transactionAmount);
             transactionList.add(transaction);
         }
 
         if (transactionType.equalsIgnoreCase("Withdraw")) {
             transaction = new Transaction(accountType, balance, description);
-
             balance = transaction.withdraw(transactionAmount);
             transactionList.add(transaction);
         }
@@ -83,6 +81,32 @@ public class Account {
             isZero = true;
         }
         return isZero;
+    }
+    
+    // ** NEW METHOD - Add to ERD ** 
+    public Transaction getTransactionByIndex(int index) {
+
+        Transaction transaction = null;
+
+        if (!transactionList.isEmpty()) {
+            if (index <= transactionList.size()) {
+                transaction = transactionList.get(index);
+            }
+        }
+        return transactionList.get(index);
+    }
+
+    // ** NEW METHOD - Add to ERD ** 
+    public Transaction getTransactionById(String transactionId) {
+
+        Transaction transaction = null;
+
+        for (int i = 0; i < transactionList.size(); i++) {
+            if (transactionList.get(i).getTransactionId().equals(transactionId)) {
+                transaction = transactionList.get(i);
+            }
+        }
+        return transaction;
     }
 
     public int getAccountNumber() {
@@ -123,5 +147,15 @@ public class Account {
 
     public void setTransactionList(ArrayList<Transaction> transactionList) {
         this.transactionList = transactionList;
+    }
+
+    @Override
+    public String toString() {
+        String accountDetails
+                = "Account Number: " + accountNumber + "\nBalance: "
+                + balance + "\n AccountType: " + accountType + "\nSortCode: "
+                + sortCode;
+
+        return accountDetails;
     }
 }

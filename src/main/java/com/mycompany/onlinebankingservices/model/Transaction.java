@@ -19,6 +19,8 @@ public class Transaction {
     private String accountType;
     private double preTransactionBalance;
     private double postTransactionBalance;
+    
+    // We could add a success or failed status.
 
     // ** Added'preTransactionBalance' to the constructors **
     // ** Removed transactionAmount **
@@ -55,19 +57,24 @@ public class Transaction {
             if (preTransactionBalance >= withdrawAmount) {
                 transactionAmount = withdrawAmount;
                 postTransactionBalance = preTransactionBalance - withdrawAmount;
+                return postTransactionBalance;
+            } else {
+                postTransactionBalance = preTransactionBalance;
+                return preTransactionBalance;
             }
-        }
-
-        if (accountType.equalsIgnoreCase("credit")) {
+        } else if (accountType.equalsIgnoreCase("credit")) {
             transactionAmount = withdrawAmount;
             postTransactionBalance = preTransactionBalance - withdrawAmount;
+            return postTransactionBalance;
+        } else {
+            postTransactionBalance = preTransactionBalance;
+            return preTransactionBalance;
         }
 
-        return postTransactionBalance;
     }
 
-    public UUID getTransactionId() {
-        return transactionId;
+    public String getTransactionId() {
+        return transactionId.toString();
     }
 
     public Date getTransactionDate() {
