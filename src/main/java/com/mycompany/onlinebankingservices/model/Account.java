@@ -3,48 +3,86 @@ package com.mycompany.onlinebankingservices.model;
 import java.util.ArrayList;
 
 public class Account {
-    private int customerID;
+
+    // No need to have a customerId in the account class.
+    // private int customerID;
+    //private String transactionType;
+    //private double transactionAmount;
+    //private String description;
+    //private int senderAccountNumber;
+    //private int receiverAccountNumber;
     private int accountNumber;
-    private String transactionType;
-    private double transactionAmount;
-    private String description;
-    private int senderAccountNumber;
-    private int receiverAccountNumber;
     private double balance;
     private String accountType;
     private String sortCode;
     private ArrayList<Transaction> transactionList;
 
-    public Account(int customerID, int accountNumber, double openingBalance, String accountType, String sortCode) {
-        this.customerID = customerID;
+    // No need to have a customerId in the account class ->
+    // The customer will have an account. The account has an accountNumber.
+    // The customer has a customerID. 
+    public Account(int accountNumber, double openingBalance, String accountType, String sortCode) {
+        // this.customerID = customerID;
         this.accountNumber = accountNumber;
         this.balance = openingBalance;
         this.accountType = accountType;
         this.sortCode = sortCode;
     }
 
-    public Transaction makeTransaction(String transactionType, double transactionAmount, String description, Transaction transaction) {
-        this.transactionType = transactionType;
-        this.transactionAmount = transactionAmount;
-        this.description = description;
-        transactionList.add(transaction);
+    // No need to pass a transaction object into ().
+    // Create within the method instead.
+    public Transaction makeTransaction(String transactionType, double transactionAmount, String description) {
 
-        // Transaction transaction = null;
-        // LOGIC here
+        // These belong to the 'Transaction' class and are there already as instance
+        // variables.
+        //this.transactionType = transactionType;
+        //this.transactionAmount = transactionAmount;
+        //this.description = description;
+        Transaction transaction = null;
+
+        if (transactionType.equalsIgnoreCase("Deposit")) {
+            transaction = new Transaction(accountType, balance, description);
+
+            balance = transaction.deposit(transactionAmount);
+            transactionList.add(transaction);
+        }
+
+        if (transactionType.equalsIgnoreCase("Withdraw")) {
+            transaction = new Transaction(accountType, balance, description);
+
+            balance = transaction.withdraw(transactionAmount);
+            transactionList.add(transaction);
+        }
+
         return transaction;
     }
 
-    public Transaction makeTransfer(String transactionType, double transactionAmount, String description, int senderAccountNumber, int receiverAccountNumber, Transaction transaction) {    
+    /*
+    // This functionality was added into the 'BankService' class instead when
+    // we talked on Friday. Apologies (must have forgotten to remove from this
+    // class)! 
+       
+    public Transaction makeTransfer(String transactionType, double transactionAmount, String description, int senderAccountNumber, int receiverAccountNumber) {
         this.transactionType = transactionType;
         this.transactionAmount = transactionAmount;
         this.description = description;
         this.senderAccountNumber = senderAccountNumber;
         this.receiverAccountNumber = receiverAccountNumber;
-        transactionList.add(transaction);
 
+        Transaction transaction = null;
+
+        //transactionList.add(transaction);
         // Transaction transaction = null;
         // LOGIC here
         return transaction;
+    }
+     */
+    // ** New method - Add to ERD diagram. ** 
+    public boolean isBalanceZero() {
+        boolean isZero = false;
+        if (balance == 0) {
+            isZero = true;
+        }
+        return isZero;
     }
 
     public int getAccountNumber() {
@@ -61,14 +99,6 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public boolean isBalanceZero() {
-        boolean isZero = false;
-        if (getBalance() == 0) {
-            isZero = true;
-        }
-        return isZero;
     }
 
     public String getAccountType() {

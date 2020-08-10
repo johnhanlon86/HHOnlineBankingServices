@@ -115,7 +115,7 @@ public class Transaction {
 
         String transactionDetails = "TransactionId: " + transactionId + "\nTransaction Amount: "
                 + transactionAmount + "\nTransaction Date: " + transactionDate + "\nDescription: "
-                + description + "\nAccount Type: " + accountType + "\nPre-Transaction Balance: " 
+                + description + "\nAccount Type: " + accountType + "\nPre-Transaction Balance: "
                 + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance;
 
         return transactionDetails;
