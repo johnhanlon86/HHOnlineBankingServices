@@ -1,6 +1,7 @@
 package com.mycompany.onlinebankingservices.model;
 
 import java.util.ArrayList;
+import java.util.List;
 // import java.lang.Math;
 
 public class Customer {
@@ -24,7 +25,7 @@ public class Customer {
     // private double openingBalance;
     // private String sortCode;
     // private boolean isBalanceZero;
-    private ArrayList<Account> accountsList;
+    private ArrayList<Account> accountsList = new ArrayList<>();
 
     public Customer(String firstName, String secondName, String emailAddress, String password) {
         this.firstName = firstName;
@@ -75,6 +76,31 @@ public class Customer {
                 }
             }
         }
+    }
+    
+    // ** NEW METHOD - Add to ERD **
+    public Account getAccountByAccountNumber(int accountNumber) {
+        Account account = null;
+
+        for (int i = 0; i < accountsList.size(); i++) {
+
+            if (accountsList.get(i).getAccountNumber() == accountNumber) {
+                account = accountsList.get(i);
+            }
+        }
+        return account;
+    }
+    
+    // ** NEW METHOD - Add to ERD **
+    public List<Account> getAllCustomerAccounts() {
+        List<Account> accountList = null;
+
+        for (int i = 0; i < accountsList.size(); i++) {
+            accountList.add(accountsList.get(i));
+        }
+
+        // ADD LOGIC
+        return accountList;
     }
 
     // No need to pass in an account. Can create account within the method.
@@ -152,6 +178,12 @@ public class Customer {
 
     public void setAccountsList(ArrayList<Account> accountsList) {
         this.accountsList = accountsList;
+    }
+    
+    @Override
+    public String toString(){
+        String customerDetails = "CustomerID: " + customerID + "FirstName: " + firstName + "\nSecondName: " + secondName+ "\nEmailAddress: " + emailAddress + "\nPassword: " + password;
+        return customerDetails;
     }
 
 }

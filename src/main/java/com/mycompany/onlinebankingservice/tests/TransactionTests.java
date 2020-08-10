@@ -57,16 +57,13 @@ public class TransactionTests {
         System.out.println("Expected 'Post-Transaction Balance': -1000.0 ");
         System.out.println("Actual: " + transaction04.getPostTransactionBalance());
 
-        
-        //****** FAILED TEST - FIX ********
-        
+                
         System.out.println("");
         System.out.println("#Test05#");
         System.out.println("Creating debit account with 1000 euro..");
         Transaction transaction05 = new Transaction("Debit", 1000);
 
         System.out.println("Withdraw 2000 euro..");
-        System.out.println("Note: debit account so expecting no change (debit ccount cannot go minus)");
         System.out.println("Expected 'Post-Transaction Balance': 1000.0 ");
         System.out.println("Actual: " + transaction05.withdraw(2000));
 

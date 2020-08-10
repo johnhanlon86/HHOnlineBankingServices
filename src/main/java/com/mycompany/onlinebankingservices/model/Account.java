@@ -155,8 +155,8 @@ public class Account {
     @Override
     public String toString() {
         String accountDetails
-                = "Account Number: " + accountNumber + "\nBalance: "
-                + balance + "\n AccountType: " + accountType + "\nSortCode: "
+                = "\nAccount Number: " + accountNumber + "\nBalance: "
+                + balance + "\nAccountType: " + accountType + "\nSortCode: "
                 + sortCode;
 
         return accountDetails;

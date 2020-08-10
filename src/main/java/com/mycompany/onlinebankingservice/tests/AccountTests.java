@@ -52,6 +52,8 @@ public class AccountTests {
         account02.makeTransaction("Withdraw", 200, "Takeway");
         System.out.println("Expected balance: 0");
         System.out.println("Acutal balance: " + account02.getBalance());
+        
+        System.out.println("");
         System.out.println("*Display Transaction Details*: ");
         System.out.println(account02.getTransactionByIndex(0));
         
