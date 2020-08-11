@@ -41,9 +41,8 @@ public class BankingService {
 
         return bankService;
     }
-    
+
     // ******** SECURITY *******
-    
     /**
      * A method to check a customers security details.
      *
@@ -68,7 +67,6 @@ public class BankingService {
         } else {
             System.out.println("Customer with customerId: " + customerId + " and password: " + customerPassword + " not found.");
         }
-        
         return theCustomer;
     }
 
@@ -80,16 +78,11 @@ public class BankingService {
         Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
 
         if (theCustomer != null) {
-            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
-
-                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
-                    account = theCustomer.getAccountsList().get(i);
-                }
-            }
+            account = getAccountHelper(theCustomer, accountNumber);
         }
         return account;
     }
-    
+
     // THIS RETURNS 0 EVEN IF PASSWORD IS INCORRECT?
     public double getAccountBalance(int customerId, int accountNumber, String customerPassword) {
 
@@ -97,90 +90,107 @@ public class BankingService {
 
         Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
         if (theCustomer != null) {
-            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
-
-                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
-                    balance = theCustomer.getAccountsList().get(i).getBalance();
-                }
-            }
+            Account account = getAccountHelper(theCustomer, accountNumber);
+            balance = account.getBalance();
         }
-
         return balance;
     }
-    
+
     public String getAccountSortCode(int customerId, int accountNumber, String customerPassword) {
 
         String sortCode = "Unavailable";
 
         Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
         if (theCustomer != null) {
-            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
-
-                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
-                    sortCode = theCustomer.getAccountsList().get(i).getSortCode();
-                }
-            }
+            Account account = getAccountHelper(theCustomer, accountNumber);
+            sortCode = account.getSortCode();
         }
-
         return sortCode;
     }
-    
+
     public String getAccountType(int customerId, int accountNumber, String customerPassword) {
 
         String accountType = "Unavailable";
 
         Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
         if (theCustomer != null) {
-            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
 
-                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
-                    accountType = theCustomer.getAccountsList().get(i).getAccountType();
-                }
-            }
+            Account account = getAccountHelper(theCustomer, accountNumber);
+            accountType = account.getAccountType();
         }
-
         return accountType;
     }
-    
+
     public Transaction deposit(int customerId, int accountNumber, String customerPassword, double depositAmount, String description) {
-        
+
         Transaction transaction = null;
 
         Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
         if (theCustomer != null) {
-            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
 
-                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
-                    transaction = theCustomer.getAccountsList().get(i).deposit(depositAmount, description);
-                }
-            }
+            Account account = getAccountHelper(theCustomer, accountNumber);
+            transaction = account.deposit(depositAmount, description);
         }
-
         return transaction;
     }
-    
+
     public Transaction withdraw(int customerId, int accountNumber, String customerPassword, double withdrawAmount, String description) {
 
         Transaction transaction = null;
 
         Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
         if (theCustomer != null) {
-            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
 
-                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
-                    transaction = theCustomer.getAccountsList().get(i).withdraw(withdrawAmount, description);
+            Account account = getAccountHelper(theCustomer, accountNumber);
+            transaction = account.withdraw(withdrawAmount, description);
+        }
+        return transaction;
+    }
+
+    public List<Transaction> getAccountHistory(int customerId, int accountNumber, String customerPassword) {
+
+        List<Transaction> accountHistory = null;
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+
+        if (theCustomer != null) {
+
+            Account account = getAccountHelper(theCustomer, accountNumber);
+            accountHistory = account.getTransactionList();
+        }
+        return accountHistory;
+    }
+
+    public Transaction getTransactionById(int customerId, int accountNumber, String customerPassword, String transactionId) {
+
+        Transaction transaction = null;
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+
+        if (theCustomer != null) {
+
+            Account account = getAccountHelper(theCustomer, accountNumber);
+
+            for (int j = 0; j < account.getTransactionList().size(); j++) {
+
+                if (account.getTransactionList().get(j).equals(transactionId)) {
+
+                    transaction = account.getTransactionList().get(j);
                 }
             }
         }
-
         return transaction;
     }
-    
-    
 
-    
-    
-   
+    private Account getAccountHelper(Customer theCustomer, int accountNumber) {
 
+        Account theAccount = null;
+
+        for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+            if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                theAccount = theCustomer.getAccountsList().get(i);
+            }
+        }
+        return theAccount;
+    }
 
 }

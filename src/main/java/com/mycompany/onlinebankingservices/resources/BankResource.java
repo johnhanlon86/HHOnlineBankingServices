@@ -78,7 +78,7 @@ public class BankResource {
     }
     
     // ** DESCRIPTION ADDED - Add to ERD **
-    // http://localhost:49000/api/bank/deposit/0/41324/darylhowe/1000/OfficeEquipment
+    // http://localhost:49000/api/bank/deposit/0/41324/darylhowe/1000/LotteryWinnings
     // http://localhost:49000/api/bank/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}
     @POST
     @Path("/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}")
@@ -97,6 +97,23 @@ public class BankResource {
     public Response withdraw(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, @PathParam("withdrawAmount") double withdrawAmount, @PathParam("description") String description) {
         Gson gson = new Gson();
         Transaction transaction = bankService.withdraw(customerId, accountNumber, customerPassword, withdrawAmount, description);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(transaction)).build();
+    }
+    
+    @GET
+    @Path("/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}")
+    public Response getAccountHistory(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+        Gson gson = new Gson();
+        List<Transaction> accountHistory = bankService.getAccountHistory(customerId, accountNumber, customerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(accountHistory)).build();
+    }
+
+    // ******** TRANSACTION *******
+    @GET
+    @Path("/gettransactionbyid/{customerId}/{accountNumber}/{customerPassword}/{transactionId}")
+    public Response getTransactionById(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, String transactionId) {
+        Gson gson = new Gson();
+        Transaction transaction = bankService.getTransactionById(customerId, accountNumber, customerPassword, transactionId);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(transaction)).build();
     }
 
