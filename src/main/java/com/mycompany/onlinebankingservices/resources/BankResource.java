@@ -81,6 +81,7 @@ public class BankResource {
     // http://localhost:49000/api/bank/deposit/0/41324/darylhowe/1000/LotteryWinnings
     // http://localhost:49000/api/bank/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}")
     public Response deposit(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, @PathParam("depositAmount") double depositAmount, @PathParam("description") String description) {
 
@@ -93,6 +94,7 @@ public class BankResource {
     // http://localhost:49000/api/bank/withdraw/0/41324/darylhowe/1000/OfficeEquipment
     // http://localhost:49000/api/bank/withdraw/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/withdraw/{customerId}/{accountNumber}/{customerPassword}/{withdrawAmount}/{description}")
     public Response withdraw(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, @PathParam("withdrawAmount") double withdrawAmount, @PathParam("description") String description) {
         Gson gson = new Gson();
@@ -100,7 +102,24 @@ public class BankResource {
         return Response.status(Response.Status.CREATED).entity(gson.toJson(transaction)).build();
     }
     
+    
+    // http://localhost:49000/api/bank/transfer/83232/41324/500/0/0/darylhowe/TestTransfer
+    // http://localhost:49000/api/bank/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}//{description}
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}/{description}")
+    public Response transfer(@PathParam("accountNumberSender") int accountNumberSender, @PathParam("accountNumberReciever") int accountNumberReciever, @PathParam("transferAmount") double transferAmount, @PathParam("customerIdSender") int customerIdSender, @PathParam("customerIdReciever") int customerIdReciever, @PathParam("customerPasswordSender") String customerPasswordSender, @PathParam("description") String description) {
+        Gson gson = new Gson();
+        List<Transaction> transactionList = bankService.transfer(accountNumberSender, accountNumberReciever, transferAmount, customerIdSender, customerIdReciever, customerPasswordSender, description);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(transactionList)).build();
+    }
+    
+    
+    // http://localhost:49000/api/bank/getaccounthistory/0/83232/darylhowe
+    // http://localhost:49000/api/bank/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}
+
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}")
     public Response getAccountHistory(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
         Gson gson = new Gson();
@@ -109,9 +128,13 @@ public class BankResource {
     }
 
     // ******** TRANSACTION *******
+    
+    // http://localhost:49000/api/bank/gettransactionbyid/0/83232/darylhowe/{transactionId}
+    // http://localhost:49000/api/bank/gettransactionbyid/{customerId}/{accountNumber}/{customerPassword}/{transactionId}
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/gettransactionbyid/{customerId}/{accountNumber}/{customerPassword}/{transactionId}")
-    public Response getTransactionById(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, String transactionId) {
+    public Response getTransactionById(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, @PathParam("transactionId") String transactionId) {
         Gson gson = new Gson();
         Transaction transaction = bankService.getTransactionById(customerId, accountNumber, customerPassword, transactionId);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(transaction)).build();

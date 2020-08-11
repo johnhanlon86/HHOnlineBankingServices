@@ -69,6 +69,9 @@ public class BankingService {
         }
         return theCustomer;
     }
+    
+    
+    
 
     // ******** ACCOUNT *******
     public Account getAccountDetails(int customerId, int accountNumber, String customerPassword) {
@@ -146,6 +149,34 @@ public class BankingService {
         }
         return transaction;
     }
+    
+    public List<Transaction> transfer(int accountNumberSender, int accountNumberReciever, double transferAmount, int customerIdSender, int customerIdReciever, String customerPasswordSender, String description) {
+
+        Customer theSenderCustomer = checkSecurityDetials(customerIdSender, customerPasswordSender);
+        Account senderAccount = getAccountHelper(theSenderCustomer, accountNumberSender);
+        Transaction transaction = null;
+        Transaction transaction02 = null;
+        
+        for (int i = 0; i < bankService.size(); i++) {
+
+            // If there is a customer with the matched 'customerIdReciever'..
+            if (bankService.get(i).getCustomerID() == customerIdReciever) {
+                transaction = senderAccount.withdraw(transferAmount, description);
+                
+                // Need to implement a way to check if it is a debit account only
+                // if the withdraw transaction was successful allow the deposit
+                // to be made. Could implement a success/failure instance variable
+                // within every transaciton (see message within transaction class).
+               transaction02 = bankService.get(i).getAccountByAccountNumber(accountNumberReciever).deposit(transferAmount, description);
+            }
+        }
+        
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.add(transaction);
+        transactionList.add(transaction02);
+        
+        return transactionList;
+    }
 
     public List<Transaction> getAccountHistory(int customerId, int accountNumber, String customerPassword) {
 
@@ -160,6 +191,9 @@ public class BankingService {
         return accountHistory;
     }
 
+   // ******** TRANSACTION *******
+
+    
     public Transaction getTransactionById(int customerId, int accountNumber, String customerPassword, String transactionId) {
 
         Transaction transaction = null;
@@ -171,7 +205,7 @@ public class BankingService {
 
             for (int j = 0; j < account.getTransactionList().size(); j++) {
 
-                if (account.getTransactionList().get(j).equals(transactionId)) {
+                if (account.getTransactionList().get(j).getTransactionId().equals(transactionId)) {
 
                     transaction = account.getTransactionList().get(j);
                 }
