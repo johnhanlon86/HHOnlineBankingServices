@@ -2,6 +2,7 @@ package com.mycompany.onlinebankingservice.service;
 
 import com.mycompany.onlinebankingservices.model.Account;
 import com.mycompany.onlinebankingservices.model.Customer;
+import com.mycompany.onlinebankingservices.model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 import org.jvnet.hk2.annotations.Service;
@@ -88,6 +89,93 @@ public class BankingService {
         }
         return account;
     }
+    
+    // THIS RETURNS 0 EVEN IF PASSWORD IS INCORRECT?
+    public double getAccountBalance(int customerId, int accountNumber, String customerPassword) {
+
+        double balance = 0;
+
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+        if (theCustomer != null) {
+            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                    balance = theCustomer.getAccountsList().get(i).getBalance();
+                }
+            }
+        }
+
+        return balance;
+    }
+    
+    public String getAccountSortCode(int customerId, int accountNumber, String customerPassword) {
+
+        String sortCode = "Unavailable";
+
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+        if (theCustomer != null) {
+            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                    sortCode = theCustomer.getAccountsList().get(i).getSortCode();
+                }
+            }
+        }
+
+        return sortCode;
+    }
+    
+    public String getAccountType(int customerId, int accountNumber, String customerPassword) {
+
+        String accountType = "Unavailable";
+
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+        if (theCustomer != null) {
+            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                    accountType = theCustomer.getAccountsList().get(i).getAccountType();
+                }
+            }
+        }
+
+        return accountType;
+    }
+    
+    public Transaction deposit(int customerId, int accountNumber, String customerPassword, double depositAmount, String description) {
+        
+        Transaction transaction = null;
+
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+        if (theCustomer != null) {
+            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                    transaction = theCustomer.getAccountsList().get(i).deposit(depositAmount, description);
+                }
+            }
+        }
+
+        return transaction;
+    }
+    
+    public Transaction withdraw(int customerId, int accountNumber, String customerPassword, double withdrawAmount, String description) {
+
+        Transaction transaction = null;
+
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+        if (theCustomer != null) {
+            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                    transaction = theCustomer.getAccountsList().get(i).withdraw(withdrawAmount, description);
+                }
+            }
+        }
+
+        return transaction;
+    }
+    
     
 
     

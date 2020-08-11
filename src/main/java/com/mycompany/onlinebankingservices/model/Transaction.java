@@ -20,7 +20,12 @@ public class Transaction {
     private double preTransactionBalance;
     private double postTransactionBalance;
     
-    // We could add a success or failed status.
+    // We could add a success or failed status - on a debit account
+    // a transaction will not go through if there is not enough money in the account.
+    // This could be hard to spot withit a status warning. 
+    
+    // We could add a 'transactionType' - it will allow customers to easily see
+    // what transactions are deposits vs withdraws
 
     // ** Added'preTransactionBalance' to the constructors **
     // ** Removed transactionAmount **
