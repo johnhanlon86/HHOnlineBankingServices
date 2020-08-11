@@ -41,37 +41,56 @@ public class BankingService {
         return bankService;
     }
     
-    // ******** ACCOUNT *******
-    public Account getAccountDetails(int customerId, int accountNumber, String customerPassword) {
-        
-        Account account = null;
+    // ******** SECURITY *******
+    
+    /**
+     * A method to check a customers security details.
+     *
+     * @param customerId The customers Id number
+     * @param customerPassword The customers password which they must enter.
+     * @return The matched customer if success, null if failed.
+     */
+    private Customer checkSecurityDetials(int customerId, String customerPassword) {
+        Customer theCustomer = null;
+
+        System.out.println("Checking security details.. .. ");
 
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerId && bankService.get(i).getPassword().equals(customerPassword)) {
-                for (int j = 0; j < bankService.get(i).getAccountsList().size(); j++) {
+                theCustomer = bankService.get(i);
+                break;
+            }
+        }
 
-                    if (bankService.get(i).getAccountsList().get(j).getAccountNumber() == accountNumber) {
-                        account = bankService.get(i).getAccountsList().get(j);
+        if (theCustomer != null) {
+            System.out.println("Security check succesful.");
+        } else {
+            System.out.println("Customer with customerId: " + customerId + " and password: " + customerPassword + " not found.");
+        }
+        
+        return theCustomer;
+    }
 
-                    }
+    // ******** ACCOUNT *******
+    public Account getAccountDetails(int customerId, int accountNumber, String customerPassword) {
+
+        Account account = null;
+
+        Customer theCustomer = checkSecurityDetials(customerId, customerPassword);
+
+        if (theCustomer != null) {
+            for (int i = 0; i < theCustomer.getAccountsList().size(); i++) {
+
+                if (theCustomer.getAccountsList().get(i).getAccountNumber() == accountNumber) {
+                    account = theCustomer.getAccountsList().get(i);
                 }
             }
         }
-
         return account;
     }
     
-    private boolean checkSecurityDetials(int customerId, String customerPassword) {
-        boolean isAbleToProceed = false;
 
-        for (int i = 0; i < bankService.size(); i++) {
-            if (bankService.get(i).getCustomerID() == customerId && bankService.get(i).getPassword().equals(customerPassword)) {
-                isAbleToProceed = true;
-            }
-        }
-
-        return isAbleToProceed;
-    }
+    
     
    
 
