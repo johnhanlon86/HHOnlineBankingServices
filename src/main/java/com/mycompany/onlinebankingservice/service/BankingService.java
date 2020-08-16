@@ -243,25 +243,25 @@ public class BankingService {
         Account senderAccount = getAccountHelper(theSenderCustomer, accountNumberSender);
         Transaction transaction = null;
         Transaction transaction02 = null;
-        
+
         for (int i = 0; i < bankService.size(); i++) {
 
             // If there is a customer with the matched 'customerIdReciever'..
             if (bankService.get(i).getCustomerID() == customerIdReciever) {
-                transaction = senderAccount.withdraw(transferAmount, description);
                 
-                // Need to implement a way to check if it is a debit account only
-                // if the withdraw transaction was successful allow the deposit
-                // to be made. Could implement a success/failure instance variable
-                // within every transaciton (see message within transaction class).
-               transaction02 = bankService.get(i).getAccountByAccountNumber(accountNumberReciever).deposit(transferAmount, description);
+                // Attempt to make withdraw, the transaction will have 'Successful' or 'Failed' status.
+                transaction = senderAccount.withdraw(transferAmount, description);
+
+                if (transaction.getStatus().equalsIgnoreCase("Successful")) {
+                    transaction02 = bankService.get(i).getAccountByAccountNumber(accountNumberReciever).deposit(transferAmount, description);
+                }
             }
         }
-        
+
         List<Transaction> transactionList = new ArrayList<>();
         transactionList.add(transaction);
         transactionList.add(transaction02);
-        
+
         return transactionList;
     }
 
