@@ -11,6 +11,15 @@ import org.jvnet.hk2.annotations.Service;
 public class BankingService {
 
     public static List<Customer> bankService = new ArrayList<>();
+    
+    String firstName;
+    String secondName;
+    String emailAddress;
+    String customerPassword;
+    String locationAddress;
+    String customerID;
+    String newFirstName;
+    String newSecondName;
 
     public List<Customer> createPastCustomers() {
 
@@ -42,6 +51,66 @@ public class BankingService {
         return bankService;
     }
 
+    // Create New Customer (Including Location).
+    public List<Customer> createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword, String locationAddress) {
+        
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.emailAddress = emailAddress;
+        this.customerPassword = customerPassword;
+        this.locationAddress = locationAddress;
+
+        Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword, locationAddress);
+
+        bankService.add(newCustomer);
+
+        return bankService;
+    }
+    
+    // Create New Customer (Without Location).
+    public List<Customer> createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword) {
+        
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.emailAddress = emailAddress;
+        this.customerPassword = customerPassword;
+
+        Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword);
+
+        bankService.add(newCustomer);
+
+        return bankService;
+    }    
+    
+    // Update Customer Name.
+
+    
+    
+    // Update Customer Email.
+    
+    
+    
+    // Update Customer Location Address.
+    
+    
+    
+    // Open Customer Account.
+    
+    
+    
+    // Close Customer Account.
+    
+    
+    
+    // Get Customer Details.
+    
+    
+    
+    // Get Customer Accounts.
+    
+    
+    
+    
     // ******** SECURITY *******
     /**
      * A method to check a customers security details.
