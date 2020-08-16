@@ -20,6 +20,8 @@ public class Transaction {
     private double preTransactionBalance;
     private double postTransactionBalance;
     
+    //** ADD to ERD - Status added **
+    private String status;
     // We could add a success or failed status - on a debit account
     // a transaction will not go through if there is not enough money in the account.
     // This could be hard to spot withit a status warning. 
@@ -53,6 +55,7 @@ public class Transaction {
     public double deposit(double depositAmount) {
         transactionAmount = depositAmount;
         postTransactionBalance = preTransactionBalance + depositAmount;
+        status = "Successful";
         return postTransactionBalance;
     }
 
@@ -65,17 +68,21 @@ public class Transaction {
             if (preTransactionBalance >= withdrawAmount) {
                 transactionAmount = withdrawAmount;
                 postTransactionBalance = preTransactionBalance - withdrawAmount;
+                status = "Successful";
                 return postTransactionBalance;
             } else {
                 postTransactionBalance = preTransactionBalance;
+                status = "Failed";
                 return preTransactionBalance;
             }
         } else if (accountType.equalsIgnoreCase("credit")) {
             transactionAmount = withdrawAmount;
             postTransactionBalance = preTransactionBalance - withdrawAmount;
+            status = "Successful";
             return postTransactionBalance;
         } else {
             postTransactionBalance = preTransactionBalance;
+            status = "Failed";
             return preTransactionBalance;
         }
 
@@ -124,6 +131,14 @@ public class Transaction {
     public void setPostTransactionBalance(double postTransactionBalance) {
         this.postTransactionBalance = postTransactionBalance;
     }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -131,7 +146,8 @@ public class Transaction {
         String transactionDetails = "TransactionId: " + transactionId + "\nTransaction Amount: "
                 + transactionAmount + "\nTransaction Date: " + transactionDate + "\nDescription: "
                 + description + "\nAccount Type: " + accountType + "\nPre-Transaction Balance: "
-                + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance;
+                + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance 
+                + "\nStatus: " + status;
 
         return transactionDetails;
     }
