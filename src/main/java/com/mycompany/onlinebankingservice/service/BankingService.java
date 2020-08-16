@@ -117,7 +117,7 @@ public class BankingService {
     // Open Customer Account.
     public List<Account> openCustomerAccount(int customerID, String accountType, int accountNumber, int balance, String sortCode, String customerPassword) {
         
-        // this.customerID = customerID;
+        this.customerID = customerID;
         this.accountType = accountType;
         this.accountNumber = accountNumber;        
         openingBalance = balance;
@@ -132,8 +132,25 @@ public class BankingService {
     }    
     
     // Close Customer Account.
-    
-    
+    public List<Account> closeCustomerAccount(int customerID, int accountNumber, String customerPassword) {
+        
+        this.customerID = customerID;
+        this.accountNumber = accountNumber;        
+        this.customerPassword = customerPassword;
+
+        // Get Account to be deleted.
+        for (int i = 0; i < bankServiceAccount.size(); i++) {
+            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword) && bankServiceAccount.get(i).getBalance() == 0) {
+                bankServiceAccount.remove(bankServiceAccount.get(i));
+                System.out.println("Account close. Thank you for banking with Howe Hanlon.");
+                break;
+            } else {
+                System.out.println("There are still funds in your account. Please arrange for these funds to be transferred. There must be no funds in the account in order to close it.");
+            }
+        }
+
+        return bankServiceAccount;
+    }
     
     // Get Customer Details.
     
