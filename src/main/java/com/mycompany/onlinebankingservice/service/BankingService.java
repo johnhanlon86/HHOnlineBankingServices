@@ -11,17 +11,25 @@ import org.jvnet.hk2.annotations.Service;
 public class BankingService {
 
     public static List<Customer> bankService = new ArrayList<>();
+    public static List<Account> bankServiceAccount = new ArrayList<>();
     
     String firstName;
     String secondName;
     String emailAddress;
     String customerPassword;
     String locationAddress;
+    
     int customerID;
     String newFirstName;
     String newSecondName;
     String newEmailAddress;
     String newCustomerPassword;
+    
+    String accountType;
+    int accountNumber;
+    int balance;
+    int openingBalance;
+    String sortCode;
 
     public List<Customer> createPastCustomers() {
 
@@ -107,8 +115,21 @@ public class BankingService {
     }
     
     // Open Customer Account.
-    
-    
+    public List<Account> openCustomerAccount(int customerID, String accountType, int accountNumber, int balance, String sortCode, String customerPassword) {
+        
+        // this.customerID = customerID;
+        this.accountType = accountType;
+        this.accountNumber = accountNumber;        
+        openingBalance = balance;
+        this.sortCode = sortCode;
+        this.customerPassword = customerPassword;
+
+        Account newAccount = new Account(accountNumber, openingBalance, accountType, sortCode);
+
+        bankServiceAccount.add(newAccount);
+
+        return bankServiceAccount;
+    }    
     
     // Close Customer Account.
     
