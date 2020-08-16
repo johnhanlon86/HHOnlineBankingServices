@@ -68,7 +68,7 @@ public class Customer {
         accountsList.add(account);
     }
 
-    public void clostAccount(int accountNumber) {
+    public void closeAccount(int accountNumber) {
 
         for (int i = 0; i < accountsList.size(); i++) {
             if (accountsList.get(i).getAccountNumber() == accountNumber) {

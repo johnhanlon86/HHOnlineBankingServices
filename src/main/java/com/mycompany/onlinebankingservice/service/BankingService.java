@@ -30,6 +30,7 @@ public class BankingService {
     int balance;
     int openingBalance;
     String sortCode;
+    List<Account> accountList = null;
 
     public List<Customer> createPastCustomers() {
 
@@ -142,7 +143,7 @@ public class BankingService {
         for (int i = 0; i < bankServiceAccount.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword) && bankServiceAccount.get(i).getBalance() == 0) {
                 bankServiceAccount.remove(bankServiceAccount.get(i));
-                System.out.println("Account close. Thank you for banking with Howe Hanlon.");
+                System.out.println("Account closed. Thank you for banking with Howe Hanlon.");
                 break;
             } else {
                 System.out.println("There are still funds in your account. Please arrange for these funds to be transferred. There must be no funds in the account in order to close it.");
@@ -177,7 +178,24 @@ public class BankingService {
     }
     
     // Get Customer Accounts.
-    
+    public List<Account> getCustomerAccounts(int customerID, String customerPassword) {
+        
+        this.customerID = customerID;
+        this.customerPassword = customerPassword;
+
+        // Get Accounts.
+        for (int i = 0; i < bankService.size(); i++) {
+            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
+                accountList = bankService.get(i).getAllCustomerAccounts();
+                System.out.println("Account " + accountList + " found.");
+                break;
+            } else {
+                System.out.println("This customer has no accounts set up.");
+            }
+        }
+
+        return accountList;
+    }    
     
     
     
