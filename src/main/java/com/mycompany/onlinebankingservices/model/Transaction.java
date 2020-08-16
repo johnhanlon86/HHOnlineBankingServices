@@ -26,6 +26,8 @@ public class Transaction {
     // a transaction will not go through if there is not enough money in the account.
     // This could be hard to spot withit a status warning. 
     
+    //** ADD to ERD - TransactionType added **
+    private String transactionType;
     // We could add a 'transactionType' - it will allow customers to easily see
     // what transactions are deposits vs withdraws
     
@@ -56,19 +58,23 @@ public class Transaction {
         transactionAmount = depositAmount;
         postTransactionBalance = preTransactionBalance + depositAmount;
         status = "Successful";
+        transactionType = "Deposit";
         return postTransactionBalance;
     }
 
     // ** Changed return accountType to double: postTransactionBalance **
     public double withdraw(double withdrawAmount) {
 
-        if (accountType.equalsIgnoreCase("debit")) {
+        transactionType = "Withdraw";
 
+        if (accountType.equalsIgnoreCase("debit")) {
+            
             // Do not let balance go minus
             if (preTransactionBalance >= withdrawAmount) {
                 transactionAmount = withdrawAmount;
                 postTransactionBalance = preTransactionBalance - withdrawAmount;
                 status = "Successful";
+                
                 return postTransactionBalance;
             } else {
                 postTransactionBalance = preTransactionBalance;
@@ -85,6 +91,7 @@ public class Transaction {
             status = "Failed";
             return preTransactionBalance;
         }
+        
 
     }
 
@@ -139,6 +146,14 @@ public class Transaction {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+   public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
+    }
 
     @Override
     public String toString() {
@@ -147,7 +162,7 @@ public class Transaction {
                 + transactionAmount + "\nTransaction Date: " + transactionDate + "\nDescription: "
                 + description + "\nAccount Type: " + accountType + "\nPre-Transaction Balance: "
                 + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance 
-                + "\nStatus: " + status;
+                + "\nStatus: " + status + "\nTransactionType: " + transactionType;
 
         return transactionDetails;
     }
