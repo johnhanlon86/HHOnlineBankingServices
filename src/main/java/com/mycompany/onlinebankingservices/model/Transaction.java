@@ -26,7 +26,10 @@ public class Transaction {
     
     // We could add a 'transactionType' - it will allow customers to easily see
     // what transactions are deposits vs withdraws
-
+    
+    public Transaction(){
+    }
+    
     // ** Added'preTransactionBalance' to the constructors **
     // ** Removed transactionAmount **
     public Transaction(String accountType, double preTransactionBalance) {

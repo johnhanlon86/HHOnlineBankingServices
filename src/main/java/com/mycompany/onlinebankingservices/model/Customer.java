@@ -28,6 +28,9 @@ public class Customer {
     // private boolean isBalanceZero;
     private ArrayList<Account> accountsList = new ArrayList<>();
 
+    public Customer(){
+    }
+    
     public Customer(String firstName, String secondName, String emailAddress, String password) {
         this.firstName = firstName;
         this.secondName = secondName;

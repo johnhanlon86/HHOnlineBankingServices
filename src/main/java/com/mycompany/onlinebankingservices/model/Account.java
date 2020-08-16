@@ -20,6 +20,9 @@ public class Account {
     private String sortCode;
     private ArrayList<Transaction> transactionList = new ArrayList<>();
 
+    public Account(){
+    }
+    
     // No need to have a customerId in the account class ->
     // The customer will have an account. The account has an accountNumber.
     // The customer has a customerID. 
