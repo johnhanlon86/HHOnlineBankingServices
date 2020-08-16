@@ -20,6 +20,8 @@ public class BankingService {
     int customerID;
     String newFirstName;
     String newSecondName;
+    String newEmailAddress;
+    String newCustomerPassword;
 
     public List<Customer> createPastCustomers() {
 
@@ -83,33 +85,26 @@ public class BankingService {
     }    
     
     // Update Customer Details.
-    public List<Customer> updateCustomerDetails(int customerID, String newFirstName, String newSecondName, String emailAddress, String customerPassword) {
+    public List<Customer> updateCustomerDetails(int customerID, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword) {
         
         this.customerID = customerID;
         this.newFirstName = newFirstName;
         this.newSecondName = newSecondName;
-        this.emailAddress = emailAddress;
-        this.customerPassword = customerPassword;
-        Customer updatedCustomer = new Customer(newFirstName, newSecondName, emailAddress, customerPassword);
+        this.emailAddress = newEmailAddress;
+        this.customerPassword = newCustomerPassword;
 
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
-                bankService.add(i, updatedCustomer);
+                bankService.get(i).setFirstName(newFirstName);
+                bankService.get(i).setSecondName(newSecondName);
+                bankService.get(i).setEmailAddress(newEmailAddress);
+                bankService.get(i).setPassword(newCustomerPassword);
                 break;
             }
         }
 
         return bankService;
     }
-    
-    
-    // Update Customer Email.
-    
-    
-    
-    // Update Customer Location Address.
-    
-    
     
     // Open Customer Account.
     
