@@ -153,8 +153,28 @@ public class BankingService {
     }
     
     // Get Customer Details.
-    
-    
+    public List<Customer> getCustomerDetails(int customerID, String customerPassword) {
+        
+        this.customerID = customerID;
+        this.customerPassword = customerPassword;
+
+        for (int i = 0; i < bankService.size(); i++) {
+            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
+                
+                firstName = bankService.get(i).getFirstName();
+                secondName = bankService.get(i).getSecondName();
+                emailAddress = bankService.get(i).getEmailAddress();
+                
+                System.out.println(firstName);
+                System.out.println(secondName);
+                System.out.println(emailAddress);
+
+                break;
+            }
+        }
+
+        return bankService;
+    }
     
     // Get Customer Accounts.
     
