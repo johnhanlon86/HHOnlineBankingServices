@@ -6,8 +6,10 @@ import com.mycompany.onlinebankingservices.model.Account;
 import com.mycompany.onlinebankingservices.model.Customer;
 import com.mycompany.onlinebankingservices.model.Transaction;
 import java.util.List;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -37,17 +39,34 @@ public class BankResource {
         List<Customer> customersList = bankService.createPastCustomers();
         return Response.status(Response.Status.CREATED).entity(gson.toJson(customersList)).build();
     }
-
+    
+    
+    // ******** CUSTOMER *******
+    
+    
     // ******** ACCOUNT *******
     // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
     // http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe
+    
+    /*
+    
     @GET
     @Path("/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAccountDetails(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+    public Response getAccountDetailsJSON(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
         Gson gson = new Gson();
         Account account = bankService.getAccountDetails(customerId, accountNumber, customerPassword);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(account)).build();
+    }
+
+*/
+    
+    @GET
+    @Path("/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Account getAccountDetailsXML(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+        Account account = bankService.getAccountDetails(customerId, accountNumber, customerPassword);
+        return account;
     }
 
     // http://localhost:49000/api/bank/getaccountbalance/0/41324/darylhowe
