@@ -129,7 +129,7 @@ public class BankResource {
         return Response.status(Response.Status.CREATED).entity(gson.toJson(transaction)).build();
     }
     
-        @POST
+    @POST
     @Produces(MediaType.APPLICATION_XML)
     @Path("/withdraw/{customerId}/{accountNumber}/{customerPassword}/{withdrawAmount}/{description}")
     public Transaction withdrawXML(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword, @PathParam("withdrawAmount") double withdrawAmount, @PathParam("description") String description) {
@@ -137,18 +137,9 @@ public class BankResource {
         return transaction;
     }
     
-    
+
     // http://localhost:49000/api/bank/transfer/83232/41324/500/0/0/darylhowe/TestTransfer
     // http://localhost:49000/api/bank/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}//{description}
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}/{description}")
-    public Response transfer(@PathParam("accountNumberSender") int accountNumberSender, @PathParam("accountNumberReciever") int accountNumberReciever, @PathParam("transferAmount") double transferAmount, @PathParam("customerIdSender") int customerIdSender, @PathParam("customerIdReciever") int customerIdReciever, @PathParam("customerPasswordSender") String customerPasswordSender, @PathParam("description") String description) {
-        Gson gson = new Gson();
-        List<Transaction> transactionList = bankService.transfer(accountNumberSender, accountNumberReciever, transferAmount, customerIdSender, customerIdReciever, customerPasswordSender, description);
-        return Response.status(Response.Status.CREATED).entity(gson.toJson(transactionList)).build();
-    }
-    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}/{description}")
@@ -158,9 +149,25 @@ public class BankResource {
         return Response.status(Response.Status.CREATED).entity(gson.toJson(transactionList)).build();
     }
     
+    @POST
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}/{description}")
+    public List<Transaction> transferXML(@PathParam("accountNumberSender") int accountNumberSender, @PathParam("accountNumberReciever") int accountNumberReciever, @PathParam("transferAmount") double transferAmount, @PathParam("customerIdSender") int customerIdSender, @PathParam("customerIdReciever") int customerIdReciever, @PathParam("customerPasswordSender") String customerPasswordSender, @PathParam("description") String description) {
+        List<Transaction> transactionList = bankService.transfer(accountNumberSender, accountNumberReciever, transferAmount, customerIdSender, customerIdReciever, customerPasswordSender, description);
+        return transactionList;
+    }
     
     // http://localhost:49000/api/bank/getaccounthistory/0/83232/darylhowe
     // http://localhost:49000/api/bank/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}")
+    public Response getAccountHistoryJSON(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+        Gson gson = new Gson();
+        List<Transaction> accountHistory = bankService.getAccountHistory(customerId, accountNumber, customerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(accountHistory)).build();
+    }
+    
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}")
@@ -169,6 +176,10 @@ public class BankResource {
         return accountHistory;
     }
 
+    
+    
+    
+    
     // ******** TRANSACTION *******
     
     // http://localhost:49000/api/bank/gettransactionbyid/0/83232/darylhowe/{transactionId}
