@@ -93,8 +93,8 @@ public class BankResource {
         return customer;
     }
     
-    // http://localhost:49000/api/bank/0/Credit/777745/500/HH1234/darylhowe
-    // http://localhost:49000/api/bank/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}
+    // http://localhost:49000/api/bank/opencustomeraccount/0/Credit/777745/500/HH1234/darylhowe
+    // http://localhost:49000/api/bank/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}
     // Open customer account (JSON).
     @PUT
     @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}")
@@ -116,6 +116,8 @@ public class BankResource {
         return customer;
     }
 
+    // http://localhost:49000/api/bank/closecustomeraccount/0/83232/darylhowe
+    // http://localhost:49000/api/bank/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}
     // Close customer account (JSON).
     @DELETE
     @Path("/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}")
