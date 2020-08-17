@@ -12,9 +12,12 @@
             
            <h1> Welcome to 'HH-Online-Banking-Service!'</h1>
            <div class = "demoContainer">
+                     
+                      <h1> A Quick Demo!</h1>
+
                      <p> We would like you to get the most out of our service. Therefore, we have created a short walk-through so you can discover some over our recently added features.  </p>
                      
-                     To get up and running first you will need to load our customer database to get access to our past customers!  </p>
+                     <p> To get up and running first you will need to load our customer database to get access to our past customers!  </p>
                      <p> Click the button below to do this! Make sure to click it only once though!  </p>
 
                     <button onclick="loadPastCustomersIntoMemory()"> Load Past Customers <b> (Only Click Once)! </b> </button>
@@ -45,12 +48,27 @@
                <ul id="people" class="list-unstyled"></ul>
            </div
            
-           <h1> Welcome to 'HH-Online-Banking-Service!'</h1>
-
 
            <br>
            <br>
-           <br>
+           <h1> Time for to explore! </h1>
+           <p> That's it for our short run through! Remember you can use the buttons above when trying to understand how some our features work! </p>
+           <p> Our customers password are always in the format of <b> 'firstNameSecondName' </b> in lowercase. </p>
+           <p> EG - Daryl Howe has the password 'darylhowe'.  </p>
+           
+           <p> To make life easy we have included the details of some of our pass customers below!</p>
+           <p> However feel free to create an account and start making transactions yourself.</p>
+           
+           <b>Past Customer01: </b> <p>  First Name: Daryl, Second Name: Howe, Id Number: 0, Email Address: daryl@hotmail.com, Password: darylhowe </p>
+           <p>Account Name: General, Account Number: 83232, Sort Code: HH1234, Account Type: Debit </p>
+           <p>Account Name: General, Account Number: 41324, Sort Code: HH1234, Account Type: Credit</p>
+           <p>Account Name: Savings, Account Number: 99928, Sort Code: HH1234, Account Type: Debit </p>
+           <b>Past Customer02: </b> <p>  First Name: Alex, Second Name: Jackson, Id Number: 1, Email Address: mj@gmail.com, Password: alexjackson </p>
+           
+           <b>Past Customer03: </b> <p>  First Name: Ciara, Second Name: Black, Id Number: 2, Email Address: ciarablack@hotmail.com, Password: ciarablack </p>
+
+           
+           <h2> View Account By Number /  </h2>
            <label for="customerId"> Enter Your Customer ID: </label>
            <input type="text" id="customerId" name="customerId">
            <br>
@@ -61,6 +79,7 @@
            
            <label for="customerPassword"> Enter Your Password: </label>
            <input type="text" id="customerPassword" name="customerPassword">
+           
            <br>
            <button onclick="viewAccountByNumber()"> View Account By Number </button>
            

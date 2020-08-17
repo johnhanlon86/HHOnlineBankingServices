@@ -179,7 +179,7 @@ axios.get('http://localhost:49000/api/bank/getcustomerdetails/' + customerId + '
                     .then(function (response) {
                         console.log(response);
                     document.getElementById('people').innerHTML = 
-                            '<div> Account Name: ' + response.data.firstName + '</div>' + 
+                            '<div> First Name: ' + response.data.firstName + '</div>' + 
                             '<div> Second Name: ' + response.data.secondName + '</div>'+
                             '<div> Id Number: ' + response.data.customerID + '</div>'+
                             '<div> Email Address: ' + response.data.emailAddress + '</div>' +
