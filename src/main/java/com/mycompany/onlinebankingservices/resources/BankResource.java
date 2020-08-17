@@ -30,6 +30,7 @@ public class BankResource {
 
     // NOTE: This should be called only once every time application is restarted.
     // http://localhost:49000/api/bank/createpastcustomers
+
     @GET
     @Path("/createpastcustomers")
     @Produces(MediaType.APPLICATION_JSON)
@@ -43,17 +44,36 @@ public class BankResource {
     
     // ******** CUSTOMER *******
     
+    @POST
+    @Path("/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createNewCustomerJSON(@PathParam("firstName") String firstName, @PathParam("secondName") String secondName, @PathParam("emailAddress") String emailAddress, @PathParam("customerPassword") String customerPassword, String locationAddress) {
+
+        Gson gson = new Gson();
+        Customer customer = bankService.createNewCustomer(firstName, secondName, emailAddress, customerPassword, locationAddress);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
+    }
+
+    @POST
+    @Path("/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Response createNewCustomerXML(@PathParam("firstName") String firstName, @PathParam("secondName") String secondName, @PathParam("emailAddress") String emailAddress, @PathParam("customerPassword") String customerPassword, String locationAddress) {
+
+        Customer customer = bankService.createNewCustomer(firstName, secondName, emailAddress, customerPassword, locationAddress);
+        return Customer;
+    }
     
+
+
     // ******** ACCOUNT *******
     // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
     // http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe
-    
-    
     
     @GET
     @Path("/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountDetailsJSON(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+        
         Gson gson = new Gson();
         Account account = bankService.getAccountDetails(customerId, accountNumber, customerPassword);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(account)).build();

@@ -85,33 +85,43 @@ public class BankingService {
     }
     
     // Create New Customer (Without Location).
-    public List<Customer> createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword) {
-        
+    // Only return the newly created customer 
+    public Customer createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword) {
+
         /*
         this.firstName = firstName;
         this.secondName = secondName;
         this.emailAddress = emailAddress;
         this.customerPassword = customerPassword;
-        */
-
+         */
+        
         Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword);
-
         bankService.add(newCustomer);
-
-        return bankService;
-    }    
+        return newCustomer;
+    } 
     
     // Update Customer Details.
-    public List<Customer> updateCustomerDetails(int customerID, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword) {
-        
+    // Only return the newly created customer 
+    public Customer updateCustomerDetails(int customerId, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword, String oldCustomerPassword) {
+
+        Customer theCustomer = checkSecurityDetials(customerId, oldCustomerPassword);
+       
+        if (theCustomer != null) {
+            theCustomer.setFirstName(newFirstName);
+            theCustomer.setSecondName(newSecondName);
+            theCustomer.setEmailAddress(newEmailAddress);
+            theCustomer.setPassword(newCustomerPassword);
+        }
+
         /*
         this.customerID = customerID;
         this.newFirstName = newFirstName;
         this.newSecondName = newSecondName;
         this.emailAddress = newEmailAddress;
         this.customerPassword = newCustomerPassword;
-        */
-
+         */
+        
+        /*
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
                 bankService.get(i).setFirstName(newFirstName);
@@ -121,8 +131,9 @@ public class BankingService {
                 break;
             }
         }
+        */
 
-        return bankService;
+        return theCustomer;
     }
     
     // Open Customer Account.
