@@ -92,9 +92,11 @@ public class BankResource {
         return customer;
     }
     
+    // http://localhost:49000/api/bank/0/Credit/777745/500/HH1234/darylhowe
+    // http://localhost:49000/api/bank/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}
     // Open customer account (JSON).
     @PUT
-    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{newCustomerPassword}")
+    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response openCustomerAccountJSON(@PathParam("customerID") int customerID, @PathParam("accountType") String accountType, @PathParam("accountNumber") int accountNumber, @PathParam("openingBalance") int openingBalance, @PathParam("sortCode") String sortCode, @PathParam("customerPassword") String customerPassword) {
 
@@ -105,7 +107,7 @@ public class BankResource {
 
     // Open customer account (XML).
     @PUT
-    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{newCustomerPassword}")
+    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}")
     @Produces(MediaType.APPLICATION_XML)
     public Customer openCustomerAccountXML(@PathParam("customerID") int customerID, @PathParam("accountType") String accountType, @PathParam("accountNumber") int accountNumber, @PathParam("openingBalance") int openingBalance, @PathParam("sortCode") String sortCode, @PathParam("customerPassword") String customerPassword) {
 
