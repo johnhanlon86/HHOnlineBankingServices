@@ -39,7 +39,7 @@ public class BankingService {
 
     public List<Customer> createPastCustomers() {
 
-        Customer customer01 = new Customer("Daryl", "Howe", "testemail@hotmail.com", "darylhowe");
+        Customer customer01 = new Customer("Daryl", "Howe", "daryl@hotmail.com", "darylhowe");
         customer01.openAccount("Debit", 83232, 1000, "HH1234");
         customer01.openAccount("Credit", 41324, 0, "HH1234");
         customer01.openAccount("Debit", 99928, 0, "HH1234", "Savings");

@@ -9,22 +9,45 @@
 
     </head>
     <body>
-       
+            
            <h1> Welcome to 'HH-Online-Banking-Service!'</h1>
+           <div class = "demoContainer">
+                     <p> We would like you to get the most out of our service. Therefore, we have created a short walk-through so you can discover some over our recently added features.  </p>
+                     
+                     To get up and running first you will need to load our customer database to get access to our past customers!  </p>
+                     <p> Click the button below to do this! Make sure to click it only once though!  </p>
+
+                    <button onclick="loadPastCustomersIntoMemory()"> Load Past Customers <b> (Only Click Once)! </b> </button>
+
+                    <p> You have successfully loaded our past/prior customers! </p>
+                    <p> If you would like to view our customer list at any time again simply press the button below! </p>
            
-           <button onclick="loadPastCustomersIntoMemory()"> Load Customers <b> (Only Click Once)! </b> </button>
-
-           <button onclick="viewAllCustomers()"> View All Customers </button>
+                    <button onclick="viewAllCustomers()"> View All Of Our Past Customers </button>
            
-           <button onclick="viewDarylAccount41324()"> View Daryl's 41324 Account Details </button>
+                    <p> To view all the different type of accounts that Daryl holds click the button below! </p>
+                    <button onclick="viewDarylsAccounts()"> View All Daryl's Accounts </button>
 
-           <button onclick="viewDarylAccountHistory83232()"> View Daryl's 83232 Account Transaction History </button>
+                    
+                    <p> Next.. To view the general account details for Daryl's account number '41324' click the button below!</p>
+                    <button onclick="viewDarylAccount41324()"> View Daryl's '41324' General Account Details </button>
 
-           <button onclick="viewDarylsAccounts()"> View All of Daryl's Accounts </button>
+                    <p> Next.. To view the transaction details for Daryl's account number '83232' click the button below!</p>
+                    <button onclick="viewDarylAccountHistory83232()"> View Daryl's '41324' Account Transaction History </button>
+
+                    <p> Next.. To view Daryl's account number '83232' balance click the button below!</p>
+                    <button onclick="viewDaryls83232AccountBalance()"> View Daryl's 83232 Account Balance </button>
+         
+                    <p> Finally.. To view Daryl's person details and accounts list together click on the button below!</p>
+                    <button onclick="viewDarylsDetails()"> View Daryl's Entire Details </button>
+           </div>
            
-           <button onclick="viewDaryls83232AccountBalance()"> View Daryl's 83232 Account Balance </button>
+           <div class = "displayInfo">
+               <ul id="people" class="list-unstyled"></ul>
+           </div
+           
+           <h1> Welcome to 'HH-Online-Banking-Service!'</h1>
 
-           <button onclick="viewDarylsDetails()"> View Daryl's Entire Details </button>
+
            <br>
            <br>
            <br>
@@ -135,30 +158,64 @@
 
            <br>
            <br>
-           <h2> Make A Deposit! </h2>
+           <h2> Make A Withdrawal! </h2>
            
-           
-           <label for="customerIdDeposit"> Enter Your Customer ID: </label>
-           <input type="text" id="customerIdDeposit" name="customerIdDeposit">
+           <label for="customerIdWithdraw"> Enter Your Customer ID: </label>
+           <input type="text" id="customerIdWithdraw" name="customerIdWithdraw">
            <br>
  
-           <label for="customerPasswordDeposit"> Enter Your Password: </label>
-           <input type="text" id="customerPasswordDeposit" name="customerPasswordDeposit">
+           <label for="customerPasswordWithdraw"> Enter Your Password: </label>
+           <input type="text" id="customerPasswordWithdraw" name="customerPasswordWithdraw">
            <br>
 
-           <label for="accountNumberDeposit"> Enter Your Account Number: </label>
-           <input type="text" id="accountNumberDeposit" name="accountNumberDeposit">
+           <label for="accountNumberWithdraw"> Enter Your Account Number: </label>
+           <input type="text" id="accountNumberWithdraw" name="accountNumberWithdraw">
            <br>           
 
-           <label for="depositAmountDeposit"> Deposit Amount: </label>
-           <input type="text" id="depositAmountDeposit" name="depositAmountDeposit">
+           <label for="withdrawAmountWithdraw"> Withdraw Amount: </label>
+           <input type="text" id="withdrawAmountWithdraw" name="withdrawAmountWithdraw">
            <br>              
 
-           <label for="descriptionDeposit"> Transaction Description: </label>
-           <input type="text" id="descriptionDeposit" name="descriptionDeposit">
+           <label for="descriptionWithdraw"> Transaction Description: </label>
+           <input type="text" id="descriptionWithdraw" name="descriptionWithdraw">
            <br>   
            
-           <button onclick="deposit()"> Deposit to your Account! </button>
+           <button onclick="withdraw()"> Withdraw from your Account! </button>
+
+           <br>
+           <br>
+           <h2> Make A Transfer! </h2>
+           
+           
+           <label for="customerSenderIdTransfer"> Customer ID (Sender): </label>
+           <input type="text" id="customerSenderIdTransfer" name="customerSenderIdTransfer">
+           <br>
+ 
+           <label for="customerReceiverIdTransfer"> Customer ID (Receiver): </label>
+           <input type="text" id="customerReceiverIdTransfer" name="customerReceiverIdTransfer">
+           <br>
+           
+           <label for="customerPasswordTransfer"> Enter Your Password: </label>
+           <input type="text" id="customerPasswordTransfer" name="customerPasswordTransfer">
+           <br>
+
+           <label for="accountNumberSenderTransfer"> Enter Your Account Number (Sender): </label>
+           <input type="text" id="accountNumberSenderTransfer" name="accountNumberSenderTransfer">
+           <br>           
+
+           <label for="accountNumberReceiverTransfer"> Enter Account Number of Receiver: </label>
+           <input type="text" id="accountNumberReceiverTransfer" name="accountNumberReceiverTransfer">
+           <br>  
+           
+           <label for="transferAmountTransfer"> Transfer Amount: </label>
+           <input type="text" id="transferAmountTransfer" name="transferAmountTransfer">
+           <br>              
+
+           <label for="descriptionTransfer"> Transfer Description: </label>
+           <input type="text" id="descriptionTransfer" name="descriptionTransfer">
+           <br>   
+           
+           <button onclick="transfer()"> Make the Transfer! </button>
            
            <ul id="people" class="list-unstyled"></ul>
 

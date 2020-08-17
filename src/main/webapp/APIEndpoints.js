@@ -271,3 +271,30 @@ function createCustomer (){
     let response = axios.post('http://localhost:49000/api/bank/deposit/'+ customerIdDeposit +'/' + accountNumberDeposit + '/' + customerPasswordDeposit + '/' + depositAmountDeposit + '/' + descriptionDeposit);
     console.log(response);
  }
+ 
+   function withdraw(){
+     
+    var customerIdWithdraw = document.getElementById('customerIdWithdraw').value;
+    var customerPasswordWithdraw = document.getElementById('customerPasswordWithdraw').value;
+    var accountNumberWithdraw = document.getElementById('accountNumberWithdraw').value;
+    var depositAmountWithdraw = document.getElementById('withdrawAmountWithdraw').value;
+    var descriptionWithdraw = document.getElementById('descriptionWithdraw').value;
+    
+    let response = axios.post('http://localhost:49000/api/bank/withdraw/'+ customerIdWithdraw +'/' + accountNumberWithdraw + '/' + customerPasswordWithdraw + '/' + depositAmountWithdraw + '/' + descriptionWithdraw);
+    console.log(response);
+ }
+ 
+    function transfer(){
+     
+    var customerSenderIdTransfer = document.getElementById('customerSenderIdTransfer').value;
+    var customerReceiverIdTransfer = document.getElementById('customerReceiverIdTransfer').value;
+    var customerPasswordTransfer = document.getElementById('customerPasswordTransfer').value;
+    var accountNumberSenderTransfer = document.getElementById('accountNumberSenderTransfer').value;
+    var accountNumberReceiverTransfer = document.getElementById('accountNumberReceiverTransfer').value;
+    var transferAmountTransfer = document.getElementById('transferAmountTransfer').value;
+    var descriptionTransfer = document.getElementById('descriptionTransfer').value;
+
+
+    let response = axios.post('http://localhost:49000/api/bank/transfer/'+ accountNumberSenderTransfer + '/' + accountNumberReceiverTransfer + '/' + transferAmountTransfer + '/' + customerSenderIdTransfer + '/' + customerReceiverIdTransfer + '/' + customerPasswordTransfer + '/' + descriptionTransfer);
+    console.log(response);
+ }
