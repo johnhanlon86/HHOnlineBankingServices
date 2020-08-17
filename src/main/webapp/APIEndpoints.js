@@ -259,3 +259,15 @@ function createCustomer (){
     let response = axios.put('http://localhost:49000/api/bank/opencustomeraccount/'+ customerIdOpenAccount +'/' + accountTypeOpenAccount + '/' + accountNumberOpenAccount + '/' + openingBalanceOpenAccount + '/' + sortCodeOpenAccount + '/'  + customerPasswordOpenAccount);
     console.log(response);
  }
+ 
+  function deposit(){
+     
+    var customerIdDeposit = document.getElementById('customerIdDeposit').value;
+    var customerPasswordDeposit = document.getElementById('customerPasswordDeposit').value;
+    var accountNumberDeposit = document.getElementById('accountNumberDeposit').value;
+    var depositAmountDeposit = document.getElementById('depositAmountDeposit').value;
+    var descriptionDeposit = document.getElementById('descriptionDeposit').value;
+
+    let response = axios.post('http://localhost:49000/api/bank/deposit/'+ customerIdDeposit +'/' + accountNumberDeposit + '/' + customerPasswordDeposit + '/' + depositAmountDeposit + '/' + descriptionDeposit);
+    console.log(response);
+ }
