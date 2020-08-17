@@ -234,3 +234,28 @@ axios.get('http://localhost:49000/api/bank/getaccounthistory/'+ customerId + '/'
                             document.getElementById('people').innerHTML = '<li class="text-danger">' + err.message + '</li>';
                             });
 }
+
+function createCustomer (){
+    console.log("hello");
+    
+    var newCustomerFirstName = document.getElementById('newCustomerFirstName').value;
+    var newCustomerSecondName = document.getElementById('newCustomerSecondName').value;
+    var newCustomerEmailAddress = document.getElementById('newCustomerEmailAddress').value;
+    var newCustomerPassword = document.getElementById('newCustomerPassword').value;
+
+    let response = axios.post('http://localhost:49000/api/bank/createnewcustomer/' + newCustomerFirstName +'/' + newCustomerSecondName + '/' + newCustomerEmailAddress + '/' + newCustomerPassword);
+    console.log(response);
+ }
+ 
+ function openNewAccount(){
+     
+    var customerIdOpenAccount = document.getElementById('customerIdOpenAccount').value;
+    var customerPasswordOpenAccount = document.getElementById('customerPasswordOpenAccount').value;
+    var accountTypeOpenAccount = document.getElementById('accountTypeOpenAccount').value;
+    var accountNumberOpenAccount = document.getElementById('accountNumberOpenAccount').value;
+    var openingBalanceOpenAccount = document.getElementById('openingBalanceOpenAccount').value;
+    var sortCodeOpenAccount = document.getElementById('sortCodeOpenAccount').value;
+
+    let response = axios.put('http://localhost:49000/api/bank/opencustomeraccount/'+ customerIdOpenAccount +'/' + accountTypeOpenAccount + '/' + accountNumberOpenAccount + '/' + openingBalanceOpenAccount + '/' + sortCodeOpenAccount + '/'  + customerPasswordOpenAccount);
+    console.log(response);
+ }

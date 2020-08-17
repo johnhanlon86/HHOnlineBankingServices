@@ -44,8 +44,90 @@
            <button onclick="viewDetails()"> View Details and Accounts </button>
            
            <button onclick="viewAccountHistory()"> View Account Transaction History </button>
+           
+           
+           
+           <br>
+           <br>
+           <br>
+           <h2> Create New Customer </h2>
+           
+           <label for="newCustomerFirstName"> Enter Your First Name: </label>
+           <input type="text" id="newCustomerFirstName" name="newCustomerFirstName">
+           <br>
+           
+           <label for="newCustomerSecondName"> Enter Your Second Name: </label>
+           <input type="text" id="newCustomerSecondName" name="newCustomerSecondName">
+           <br>
 
+           <label for="newCustomerEmailAddress"> Enter Your Email Address: </label>
+           <input type="text" id="newCustomerEmailAddress" name="newCustomerEmailAddress">
+           <br>
+           
+           <label for="newCustomerPassword"> Enter Your Password: </label>
+           <input type="text" id="newCustomerPassword" name="newCustomerPassword">
+           <br>
+           
+           <button onclick="createCustomer()"> Create A New Customer! </button>
 
+           
+           
+           
+           <br>
+           <br>
+           <br>
+           <h2> Open New Account - (Customer must already exist!) </h2>
+           
+           
+           <label for="customerIdOpenAccount"> Enter Your Customer ID: </label>
+           <input type="text" id="customerIdOpenAccount" name="customerIdOpenAccount">
+           <br>
+ 
+           <label for="customerPasswordOpenAccount"> Enter Your Password: </label>
+           <input type="text" id="customerPasswordOpenAccount" name="customerPasswordOpenAccount">
+           <br>
+           
+           <label for="accountTypeOpenAccount"> Account Type (Credit/Debit): </label>
+           <input type="text" id="accountTypeOpenAccount" name="accountTypeOpenAccount">
+           <br>
+           
+           <label for="accountNumberOpenAccount"> Account Number: </label>
+           <input type="text" id="accountNumberOpenAccount" name="accountNumberOpenAccount">
+           <br>           
+
+           <label for="openingBalanceOpenAccount"> Opening Balance: </label>
+           <input type="text" id="openingBalanceOpenAccount" name="openingBalanceOpenAccount">
+           <br>              
+
+           <label for="sortCodeOpenAccount"> SortCode: </label>
+           <input type="text" id="sortCodeOpenAccount" name="sortCodeOpenAccount">
+           <br>    
+           
+           <button onclick="openNewAccount()"> Open Your New Account! </button>
+
+                      <br>
+           <br>
+           <br>
+           <h2> Make A Transaction! </h2>
+           
+           <label for="newCustomerFirstName"> Enter Your First Name: </label>
+           <input type="text" id="newCustomerFirstName" name="newCustomerFirstName">
+           <br>
+           
+           <label for="newCustomerSecondName"> Enter Your Second Name: </label>
+           <input type="text" id="newCustomerSecondName" name="newCustomerSecondName">
+           <br>
+
+           <label for="newCustomerEmailAddress"> Enter Your Email Address: </label>
+           <input type="text" id="newCustomerEmailAddress" name="newCustomerEmailAddress">
+           <br>
+           
+           <label for="newCustomerPassword"> Enter Your Password: </label>
+           <input type="text" id="newCustomerPassword" name="newCustomerPassword">
+           <br>
+           
+           <button onclick="createCustomer()"> Create A New Customer! </button>
+           
            <ul id="people" class="list-unstyled"></ul>
 
            <ul id="customerDetails" class="list-unstyled"></ul>
@@ -53,18 +135,6 @@
            <ul id="accounts" class="list-unstyled"></ul>
 
            
-            
-                    <!--
-        
-        // ***To be updated with Online Banking Services URL.
-        <form action ="http://localhost:49000/api/mortgagecalc/payment" method ="get" id ="form1">
-            Principal :<br> <input type = "text" name = "principal" value ="200000"> <br> 
-            Interest Rate:<br><input type="text" name = "interest" value ="4.5"> <br>
-            Loan Term:<br> <input type ="text" name ="term" value ="10"> <br>
-        </form>
-        
-                    <button type ="submit" form="form1" value ="Submit">Submit</button >
 
-        -->
     </body>
 </html>
