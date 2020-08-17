@@ -24,10 +24,33 @@
            
            <button onclick="viewDaryls83232AccountBalance()"> View Daryl's 83232 Account Balance </button>
 
-           <button onclick="getDarylEntireDetails()"> View Daryl's Entire Details </button>
+           <button onclick="viewDarylsDetails()"> View Daryl's Entire Details </button>
+           <br>
+           <br>
+           <br>
+           <label for="customerId"> Enter Your Customer ID: </label>
+           <input type="text" id="customerId" name="customerId">
+           <br>
+           
+           <label for="accountNumber"> Enter Account Number: </label>
+           <input type="text" id="accountNumber" name="accountNumber">
+           <br>
+           
+           <label for="customerPassword"> Enter Your Password: </label>
+           <input type="text" id="customerPassword" name="customerPassword">
+           <br>
+           <button onclick="viewAccountByNumber()"> View Account By Number </button>
+           
+           <button onclick="viewDetails()"> View Details and Accounts </button>
+           
+           <button onclick="viewAccountHistory()"> View Account Transaction History </button>
 
 
            <ul id="people" class="list-unstyled"></ul>
+
+           <ul id="customerDetails" class="list-unstyled"></ul>
+           <ul id="accountsDetials" class="list-unstyled"></ul>
+           <ul id="accounts" class="list-unstyled"></ul>
 
            
             
@@ -39,7 +62,8 @@
             Interest Rate:<br><input type="text" name = "interest" value ="4.5"> <br>
             Loan Term:<br> <input type ="text" name ="term" value ="10"> <br>
         </form>
-                <button type ="submit" form="form1" value ="Submit">Submit</button >
+        
+                    <button type ="submit" form="form1" value ="Submit">Submit</button >
 
         -->
     </body>

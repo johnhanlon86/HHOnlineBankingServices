@@ -5,16 +5,6 @@
 
 
 
-$(document).ready(function() {
-    $.ajax({
-        url: "http://localhost:49000/api/bank/createpastcustomers"
-    }).then(function(data) {
-       $('.resp-id').append(data.firstName);
-       $('.resp-isbn').append(data.secondName);
-       $('.resp-publisher').append(data.emailAddress);
-    });
-});
-
 
 function loadPastCustomersIntoMemory() {
   axios.get('http://localhost:49000/api/bank/createpastcustomers')
@@ -128,3 +118,119 @@ axios.get('http://localhost:49000/api/bank/getcustomeraccounts/0/darylhowe')
 
 
 
+
+function viewDarylsDetails() {
+
+axios.get('http://localhost:49000/api/bank/getcustomerdetails/0/darylhowe')
+                    .then(function (response) {
+                        console.log(response);
+                    document.getElementById('people').innerHTML = 
+                            '<div> Account Name: ' + response.data.firstName + '</div>' + 
+                            '<div> Second Name: ' + response.data.secondName + '</div>'+
+                            '<div> Id Number: ' + response.data.customerID + '</div>'+
+                            '<div> Email Address: ' + response.data.emailAddress + '</div>' +
+                            '<div> Password: ' + response.data.password + '</div>' +                           
+                                
+                                response.data.accountsList.map(function (account) {
+                    return (
+                            '<div class = "customerContainer">' +
+                            
+                            '<div> Account Name: ' + account.accountName + '</div>' +
+                            '<div> Account Number: ' + account.accountNumber + '</div>' + 
+                            '<div> Sort Code: ' + account.sortCode + '</div>' +
+                            '<div> Account Type: ' + account.accountType + '</div>' + 
+                            '<div> Balance: ' + account.balance + '</div>'  +
+                            
+                            '<div> -------------------------------- </div>' +
+                            '</div>' 
+                            ) ;
+                            }).join('');
+                            })
+                            .catch(function (err) {
+                            document.getElementById('people').innerHTML = '<li class="text-danger">' + err.message + '</li>';
+                            });
+}
+
+
+function viewAccountByNumber() {
+
+var customerId = document.getElementById('customerId').value;
+var accountNumber = document.getElementById('accountNumber').value;
+var customerPassword = document.getElementById('customerPassword').value;
+
+
+axios.get('http://localhost:49000/api/bank/getaccountdetails/' + customerId + '/' + accountNumber + '/' + customerPassword).then(resp => {
+        console.log(resp);
+        document.getElementById('people').innerHTML = 
+            '<div> Account Name: ' + resp.data.accountName + '</div>' +
+            '<div> Account Number: ' + resp.data.accountNumber + '</div>' + 
+            '<div> Sort Code: ' + resp.data.sortCode + '</div>' +
+            '<div> Account Type: ' + resp.data.accountType + '</div>' + 
+            '<div> Balance: ' + resp.data.balance + '</div>'  
+});
+}
+
+function viewDetails() {
+
+var customerId = document.getElementById('customerId').value;
+var customerPassword = document.getElementById('customerPassword').value;
+
+axios.get('http://localhost:49000/api/bank/getcustomerdetails/' + customerId + '/' + customerPassword)
+                    .then(function (response) {
+                        console.log(response);
+                    document.getElementById('people').innerHTML = 
+                            '<div> Account Name: ' + response.data.firstName + '</div>' + 
+                            '<div> Second Name: ' + response.data.secondName + '</div>'+
+                            '<div> Id Number: ' + response.data.customerID + '</div>'+
+                            '<div> Email Address: ' + response.data.emailAddress + '</div>' +
+                            '<div> Password: ' + response.data.password + '</div>' +                           
+                                
+                                response.data.accountsList.map(function (account) {
+                    return (
+                            '<div class = "customerContainer">' +
+                            
+                            '<div> Account Name: ' + account.accountName + '</div>' +
+                            '<div> Account Number: ' + account.accountNumber + '</div>' + 
+                            '<div> Sort Code: ' + account.sortCode + '</div>' +
+                            '<div> Account Type: ' + account.accountType + '</div>' + 
+                            '<div> Balance: ' + account.balance + '</div>'  +
+                            
+                            '<div> -------------------------------- </div>' +
+                            '</div>' 
+                            ) ;
+                            }).join('');
+                            })
+                            .catch(function (err) {
+                            document.getElementById('people').innerHTML = '<li class="text-danger">' + err.message + '</li>';
+                            });
+}
+
+function viewAccountHistory() {
+
+var customerId = document.getElementById('customerId').value;
+var accountNumber = document.getElementById('accountNumber').value;
+var customerPassword = document.getElementById('customerPassword').value;
+
+axios.get('http://localhost:49000/api/bank/getaccounthistory/'+ customerId + '/' + accountNumber + '/' + customerPassword)
+                    .then(function (response) {
+                    document.getElementById('people').innerHTML = response.data.map(function (transaction) {
+                    return (
+                            '<div class = "customerContainer">' +
+                            '<div> Transaction Id: ' + transaction.transactionId + '</div>' +
+                            '<div> Date: ' + transaction.transactionDate + '</div>' +
+                            '<div> Description: ' + transaction.description + '</div>' +
+                            '<div> Account Type: ' + transaction.accountType + '</div>' +
+                            '<div> Amount: ' + transaction.transactionAmount + '</div>' +
+                            '<div> Pre-Transaction Balance: ' + transaction.preTransactionBalance + '</div>' +
+                            '<div> Post-Transaction Balance: ' + transaction.postTransactionBalance + '</div>' +
+                            '<div> Status: ' + transaction.status + '</div>' +
+                            '<div> Transaction Type: ' + transaction.transactionType + '</div>' +
+                            '<div> -------------------------------- </div>' +
+                            '</div>'
+                            );
+                            }).join('');
+                            })
+                            .catch(function (err) {
+                            document.getElementById('people').innerHTML = '<li class="text-danger">' + err.message + '</li>';
+                            });
+}
