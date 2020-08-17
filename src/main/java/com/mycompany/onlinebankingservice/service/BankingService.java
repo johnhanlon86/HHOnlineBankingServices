@@ -137,7 +137,9 @@ public class BankingService {
     }
     
     // Open Customer Account.
-    public List<Account> openCustomerAccount(int customerID, String accountType, int accountNumber, int balance, String sortCode, String customerPassword) {
+    // Can either retun the customer (which will contain the new account)
+    // or just the new account (ERD has customer).
+    public Customer openCustomerAccount(int customerId, String accountType, int accountNumber, int openingBalance, String sortCode, String customerPassword) {
         
         /*
         this.customerID = customerID;
@@ -148,11 +150,19 @@ public class BankingService {
         this.customerPassword = customerPassword;
         */
         
+        
         Account newAccount = new Account(accountNumber, openingBalance, accountType, sortCode);
 
-        bankServiceAccount.add(newAccount);
+        Customer customer = checkSecurityDetials(customerId, customerPassword);
+        if (customer != null) {
+            customer.getAccountsList().add(newAccount);
+        }
+                
+        
+        
+        //bankServiceAccount.add(newAccount);
 
-        return bankServiceAccount;
+        return customer;
     }    
     
     // Close Customer Account.
