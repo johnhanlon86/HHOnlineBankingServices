@@ -70,6 +70,8 @@ public class BankResource {
 
     
     // Update customer details (JSON).
+    // http://localhost:49000/api/bank/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}
+    // http://localhost:49000/api/bank/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}
     @PUT
     @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
