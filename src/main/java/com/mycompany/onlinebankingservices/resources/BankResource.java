@@ -44,23 +44,46 @@ public class BankResource {
     
     // ******** CUSTOMER *******
     
+    // Create new customer (JSON).
     @POST
     @Path("/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createNewCustomerJSON(@PathParam("firstName") String firstName, @PathParam("secondName") String secondName, @PathParam("emailAddress") String emailAddress, @PathParam("customerPassword") String customerPassword, String locationAddress) {
 
         Gson gson = new Gson();
-        Customer customer = bankService.createNewCustomer(firstName, secondName, emailAddress, customerPassword, locationAddress);
+        List <Customer> customer = bankService.createNewCustomer(firstName, secondName, emailAddress, customerPassword, locationAddress);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
     }
 
+    // Create new customer (XML).
     @POST
     @Path("/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}")
     @Produces(MediaType.APPLICATION_XML)
-    public Response createNewCustomerXML(@PathParam("firstName") String firstName, @PathParam("secondName") String secondName, @PathParam("emailAddress") String emailAddress, @PathParam("customerPassword") String customerPassword, String locationAddress) {
+    public List <Customer> createNewCustomerXML(@PathParam("firstName") String firstName, @PathParam("secondName") String secondName, @PathParam("emailAddress") String emailAddress, @PathParam("customerPassword") String customerPassword, String locationAddress) {
 
-        Customer customer = bankService.createNewCustomer(firstName, secondName, emailAddress, customerPassword, locationAddress);
-        return Customer;
+        List <Customer> customer = bankService.createNewCustomer(firstName, secondName, emailAddress, customerPassword, locationAddress);
+        return customer;
+    }
+
+    // Update customer details (JSON).
+    @PUT
+    @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateCustomerDetailsJSON(@PathParam("customerID") int customerID, @PathParam("newFirstName") String newFirstName, @PathParam("newSecondName") String newSecondName, @PathParam("newEmailAddress") String newEmailAddress, @PathParam("newCustomerPassword") String newCustomerPassword) {
+
+        Gson gson = new Gson();
+        List <Customer> customer = bankService.updateCustomerDetails(customerID, newFirstName, newSecondName, newEmailAddress, newCustomerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
+    }
+
+    // Update customer details (XML).
+    @PUT
+    @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List <Customer> updateCustomerDetailsXML(@PathParam("customerID") int customerID, @PathParam("newFirstName") String newFirstName, @PathParam("newSecondName") String newSecondName, @PathParam("newEmailAddress") String newEmailAddress, @PathParam("newCustomerPassword") String newCustomerPassword) {
+
+        List <Customer> customer = bankService.updateCustomerDetails(customerID, newFirstName, newSecondName, newEmailAddress, newCustomerPassword);
+        return customer;
     }
     
 
