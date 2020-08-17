@@ -3,17 +3,25 @@
     <head>
         <title> HH Online Banking Services</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="APIendpoints.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link href="style.css" rel="stylesheet" type="text/css">
+
     </head>
     <body>
-        <h1>Hello World!</h1>
-        
-        <!--
-         <div>
-            <p class="resp-sortCode">The ID is: </p>
-        </div>
+       
+           <h1> Welcome to 'HH-Online-Banking-Service!'</h1>
+           
+           <button onclick="loadPastCustomersIntoMemory()"> Load Customers <b> (Only Click Once)! </b> </button>
+
+           <button onclick="viewAllCustomers()"> View All Customers </button>
+           
+           <button onclick="viewDarylAccount41324()"> View Daryl's 41324 Account Details </button>
+
+           <ul id="people" class="list-unstyled"></ul>
+
+            
+                    <!--
         
         // ***To be updated with Online Banking Services URL.
         <form action ="http://localhost:49000/api/mortgagecalc/payment" method ="get" id ="form1">
@@ -21,26 +29,8 @@
             Interest Rate:<br><input type="text" name = "interest" value ="4.5"> <br>
             Loan Term:<br> <input type ="text" name ="term" value ="10"> <br>
         </form>
+                <button type ="submit" form="form1" value ="Submit">Submit</button >
+
         -->
-        
-        <button type ="submit" form="form1" value ="Submit">Submit</button >
-        
-           <h1>axios.get</h1>
-            <ul id="people" class="list-unstyled"></ul>
-        
-            <script>
-      axios.get('http://localhost:49000/api/bank/createpastcustomers')
-        .then(function (response) {
-          document.getElementById('people').innerHTML = response.data.map(function (person) {
-            return (
-                  '<div>Github:' + person.firstName + '</div>' 
-            );
-          }).join('');
-        })
-        .catch(function (err) {
-          document.getElementById('people').innerHTML = '<li class="text-danger">' + err.message + '</li>';
-        });
-    </script>
-            
     </body>
 </html>
