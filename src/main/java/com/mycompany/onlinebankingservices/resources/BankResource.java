@@ -159,10 +159,10 @@ public class BankResource {
     @GET
     @Path("/getcustomerdetails/{customerId}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCustomerDetailsJSON(@PathParam("customerID") int customerID, @PathParam("customerPassword") String customerPassword) {
+    public Response getCustomerDetailsJSON(@PathParam("customerId") int customerId, @PathParam("customerPassword") String customerPassword) {
         
         Gson gson = new Gson();
-        Customer customer = bankService.getCustomerDetails(customerID, customerPassword);
+        Customer customer = bankService.getCustomerDetails(customerId, customerPassword);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
     }
     
@@ -170,8 +170,8 @@ public class BankResource {
     @GET
     @Path("/getcustomerdetails/{customerId}/{customerPassword}")
     @Produces(MediaType.APPLICATION_XML)
-    public Customer getCustomerDetailsXML(@PathParam("customerID") int customerID, @PathParam("customerPassword") String customerPassword) {
-        Customer customer = bankService.getCustomerDetails(customerID, customerPassword);
+    public Customer getCustomerDetailsXML(@PathParam("customerID") int customerId, @PathParam("customerPassword") String customerPassword) {
+        Customer customer = bankService.getCustomerDetails(customerId, customerPassword);
         return customer;
     }
     
