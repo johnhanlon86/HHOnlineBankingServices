@@ -9,9 +9,11 @@ and open the template in the editor.
 */
 
 body{
-    background-color: white;
+    background-color: lightsalmon;
     color: black;
     font-family: "Roboto";
+    margin-left: 15vw;
+    margin-right: 15vw;
 }
 
 p{
@@ -61,10 +63,11 @@ button{
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
+  background-color: silver;
   border: none;
   border-radius: 15px;
   box-shadow: 0 5px #999;
+  margin-top: 1vh;
 }
 
 button:hover {background-color: #3e8e41}
