@@ -92,7 +92,7 @@ public class BankResource {
     
     // Open customer account (JSON).
     @PUT
-    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{newCustomerPassword}")
+    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response openCustomerAccountJSON(@PathParam("customerID") int customerID, @PathParam("accountType") String accountType, @PathParam("accountNumber") int accountNumber, @PathParam("openingBalance") int openingBalance, @PathParam("sortCode") String sortCode, @PathParam("customerPassword") String customerPassword) {
 
@@ -103,11 +103,32 @@ public class BankResource {
 
     // Open customer account (XML).
     @PUT
-    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{newCustomerPassword}")
+    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}")
     @Produces(MediaType.APPLICATION_XML)
     public Customer openCustomerAccountXML(@PathParam("customerID") int customerID, @PathParam("accountType") String accountType, @PathParam("accountNumber") int accountNumber, @PathParam("openingBalance") int openingBalance, @PathParam("sortCode") String sortCode, @PathParam("customerPassword") String customerPassword) {
 
         Customer customer = bankService.openCustomerAccount(customerID, accountType, accountNumber, openingBalance, sortCode, customerPassword);
+        return customer;
+    }
+
+    // Close customer account (JSON).
+    @DELETE
+    @Path("/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response closeCustomerAccountJSON(@PathParam("customerID") int customerID, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+
+        Gson gson = new Gson();
+        Customer customer = bankService.closeCustomerAccount(customerID, accountNumber, customerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
+    }
+
+    // Close customer account (XML).
+    @DELETE
+    @Path("/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Customer closeCustomerAccountXML(@PathParam("customerID") int customerID, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
+
+        Customer customer = bankService.closeCustomerAccount(customerID, accountNumber, customerPassword);
         return customer;
     }
 
