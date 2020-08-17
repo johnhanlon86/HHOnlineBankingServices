@@ -105,7 +105,7 @@ public class Customer {
     
     // ** NEW METHOD - Add to ERD **
     public List<Account> getAllCustomerAccounts() {
-        List<Account> accountList = null;
+        List<Account> accountList = new ArrayList<>();
 
         for (int i = 0; i < accountsList.size(); i++) {
             accountList.add(accountsList.get(i));

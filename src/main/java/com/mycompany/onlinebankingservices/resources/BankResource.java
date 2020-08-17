@@ -176,26 +176,29 @@ public class BankResource {
     }
     
     
-
+    // http://localhost:49000/api/bank/getcustomeraccounts/0/darylhowe
+    // http://localhost:49000/api/bank/getcustomeraccounts/{customerId}/{customerPassword}
     // Get customer accounts (JSON).
     @GET
     @Path("/getcustomeraccounts/{customerId}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCustomerAccountsJSON(@PathParam("customerID") int customerID, @PathParam("customerPasswordD") String customerPassword) {
-        
+    public Response getCustomerAccountsJSON(@PathParam("customerId") int customerId, @PathParam("customerPassword") String customerPassword) {
+
         Gson gson = new Gson();
-        List<Account> account = bankService.getCustomerAccounts(customerID, customerPassword);
+        List<Account> account = bankService.getCustomerAccounts(customerId, customerPassword);
         return Response.status(Response.Status.CREATED).entity(gson.toJson(account)).build();
     }
+    
     
     // Get customer accounts (XML).
     @GET
     @Path("/getcustomeraccounts/{customerId}/{customerPassword}")
     @Produces(MediaType.APPLICATION_XML)
-    public List<Account> getCustomerAccountsXML(@PathParam("customerID") int customerID, @PathParam("customerPassword") String customerPassword) {
-        List<Account> account = bankService.getCustomerAccounts(customerID, customerPassword);
+    public List<Account> getCustomerAccountsXML(@PathParam("customerId") int customerId, @PathParam("customerPassword") String customerPassword) {
+        List<Account> account = bankService.getCustomerAccounts(customerId, customerPassword);
         return account;
     }
+
 
     // ******** ACCOUNT *******
     // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
