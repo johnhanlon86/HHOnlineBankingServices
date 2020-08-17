@@ -29,7 +29,7 @@
             <ul id="people" class="list-unstyled"></ul>
         
             <script>
-      axios.get('https://reqbin.com/echo/get/json')
+      axios.get('http://localhost:49000/api/bank/createpastcustomers')
         .then(function (response) {
           document.getElementById('people').innerHTML = response.data.map(function (person) {
             return (
