@@ -22,7 +22,7 @@ public class BankResource {
 
     private BankingService bankService = new BankingService();
 
-    // http://localhost:49000/api/bank/test
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/test"
     @GET
     @Path("/test")
     public String test() {
@@ -30,7 +30,7 @@ public class BankResource {
     }
 
     // NOTE: This should be called only once every time application is restarted.
-    // http://localhost:49000/api/bank/createpastcustomers
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/createpastcustomers"
 
     @GET
     @Path("/createpastcustomers")
@@ -42,7 +42,7 @@ public class BankResource {
         return Response.status(Response.Status.CREATED).entity(gson.toJson(customersList)).build();
     }
 
-    // http://localhost:49000/api/bank    
+    // curl -vi -X GET -G "http://localhost:49000/api/bank"    
     // This returns the entire list of customer - used for testing. 
     @GET
     @Path("")
@@ -59,8 +59,8 @@ public class BankResource {
     // ******** CUSTOMER *******
     
     // Create new customer (JSON).
-    // http://localhost:49000/api/bank/createnewcustomer/Carl/Rodgers/carl@gmail.com/carlrodgers
-    // http://localhost:49000/api/bank/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/createnewcustomer/Carl/Rodgers/carl@gmail.com/carlrodgers"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}"
 
     @POST
     @Path("/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}")
@@ -84,8 +84,8 @@ public class BankResource {
 
     
     // Update customer details (JSON).
-    // http://localhost:49000/api/bank/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}
-    // http://localhost:49000/api/bank/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}"
     @PUT
     @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -106,8 +106,8 @@ public class BankResource {
         return customer;
     }
     
-    // http://localhost:49000/api/bank/opencustomeraccount/0/Credit/777745/500/HH1234/darylhowe
-    // http://localhost:49000/api/bank/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/opencustomeraccount/0/Credit/777745/500/HH1234/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}"
     // Open customer account (JSON).
     @PUT
     @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{customerPassword}")
@@ -129,8 +129,8 @@ public class BankResource {
         return customer;
     }
 
-    // http://localhost:49000/api/bank/closecustomeraccount/0/83232/darylhowe
-    // http://localhost:49000/api/bank/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/closecustomeraccount/0/83232/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}"
     // Close customer account (JSON).
     @DELETE
     @Path("/closecustomeraccount/{customerID}/{accountNumber}/{customerPassword}")
@@ -153,8 +153,8 @@ public class BankResource {
     }
 
     
-    // http://localhost:49000/api/bank/getcustomerdetails/0/darylhowe
-    // http://localhost:49000/api/bank/getcustomerdetails/{customerId}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getcustomerdetails/0/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getcustomerdetails/{customerId}/{customerPassword}"
     // Get customer details (JSON).
     @GET
     @Path("/getcustomerdetails/{customerId}/{customerPassword}")
@@ -176,8 +176,8 @@ public class BankResource {
     }
     
     
-    // http://localhost:49000/api/bank/getcustomeraccounts/0/darylhowe
-    // http://localhost:49000/api/bank/getcustomeraccounts/{customerId}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getcustomeraccounts/0/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getcustomeraccounts/{customerId}/{customerPassword}"
     // Get customer accounts (JSON).
     @GET
     @Path("/getcustomeraccounts/{customerId}/{customerPassword}")
@@ -201,8 +201,8 @@ public class BankResource {
 
 
     // ******** ACCOUNT *******
-    // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
-    // http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe"
     
     @GET
     @Path("/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}")
@@ -222,8 +222,8 @@ public class BankResource {
         return account;
     }
 
-    // http://localhost:49000/api/bank/getaccountbalance/0/41324/darylhowe
-    // http://localhost:49000/api/bank/getaccountbalance/{customerId}/{accountNumber}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccountbalance/0/41324/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccountbalance/{customerId}/{accountNumber}/{customerPassword}"
     @GET
     @Path("/getaccountbalance/{customerId}/{accountNumber}/{customerPassword}")
     public double getAccountBalance(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
@@ -232,8 +232,8 @@ public class BankResource {
     }
 
 
-    // http://localhost:49000/api/bank/getaccountsortcode/0/41324/darylhowe
-    // http://localhost:49000/api/bank/getaccountsortcode/{customerId}/{accountNumber}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccountsortcode/0/41324/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccountsortcode/{customerId}/{accountNumber}/{customerPassword}"
     @GET
     @Path("/getaccountsortcode/{customerId}/{accountNumber}/{customerPassword}")
     public String getAccountSortCode(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
@@ -241,8 +241,8 @@ public class BankResource {
         return sortCode;
     }
 
-    // http://localhost:49000/api/bank/getaccounttype/0/41324/darylhowe
-    // http://localhost:49000/api/bank/getaccounttype/{customerId}/{accountNumber}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccounttype/0/41324/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccounttype/{customerId}/{accountNumber}/{customerPassword}"
     @GET
     @Path("/getaccounttype/{customerId}/{accountNumber}/{customerPassword}")
     public String getAccountType(@PathParam("customerId") int customerId, @PathParam("accountNumber") int accountNumber, @PathParam("customerPassword") String customerPassword) {
@@ -251,8 +251,8 @@ public class BankResource {
     }
     
     // ** DESCRIPTION ADDED - Add to ERD **
-    // http://localhost:49000/api/bank/deposit/0/41324/darylhowe/1000/LotteryWinnings
-    // http://localhost:49000/api/bank/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/deposit/0/41324/darylhowe/1000/LotteryWinnings"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}"
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/deposit/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}")
@@ -273,8 +273,8 @@ public class BankResource {
     }
     
     // ** DESCRIPTION ADDED - Add to ERD **
-    // http://localhost:49000/api/bank/withdraw/0/41324/darylhowe/1000/OfficeEquipment
-    // http://localhost:49000/api/bank/withdraw/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/withdraw/0/41324/darylhowe/1000/OfficeEquipment"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/withdraw/{customerId}/{accountNumber}/{customerPassword}/{depositAmount}/{description}"
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/withdraw/{customerId}/{accountNumber}/{customerPassword}/{withdrawAmount}/{description}")
@@ -293,8 +293,8 @@ public class BankResource {
     }
     
 
-    // http://localhost:49000/api/bank/transfer/83232/41324/500/0/0/darylhowe/TestTransfer
-    // http://localhost:49000/api/bank/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}//{description}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/transfer/83232/41324/500/0/0/darylhowe/TestTransfer"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}//{description}"
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/transfer/{accountNumberSender}/{accountNumberReciever}/{transferAmount}/{customerIdSender}/{customerIdReciever}/{customerPasswordSender}/{description}")
@@ -312,8 +312,8 @@ public class BankResource {
         return transactionList;
     }
     
-    // http://localhost:49000/api/bank/getaccounthistory/0/83232/darylhowe
-    // http://localhost:49000/api/bank/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccounthistory/0/83232/darylhowe"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}"
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getaccounthistory/{customerId}/{accountNumber}/{customerPassword}")
@@ -337,8 +337,8 @@ public class BankResource {
     
     // ******** TRANSACTION *******
     
-    // http://localhost:49000/api/bank/gettransactionbyid/0/83232/darylhowe/{transactionId}
-    // http://localhost:49000/api/bank/gettransactionbyid/{customerId}/{accountNumber}/{customerPassword}/{transactionId}
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/gettransactionbyid/0/83232/darylhowe/{transactionId}"
+    // curl -vi -X GET -G "http://localhost:49000/api/bank/gettransactionbyid/{customerId}/{accountNumber}/{customerPassword}/{transactionId}"
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/gettransactionbyid/{customerId}/{accountNumber}/{customerPassword}/{transactionId}")
