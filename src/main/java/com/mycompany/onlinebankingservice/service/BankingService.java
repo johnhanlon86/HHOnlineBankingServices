@@ -101,7 +101,7 @@ public class BankingService {
     } 
     
     // Update Customer Details.
-    // Only return the newly created customer 
+    // Only return the updated customer .
     public Customer updateCustomerDetails(int customerId, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword, String oldCustomerPassword) {
 
         Customer theCustomer = checkSecurityDetials(customerId, oldCustomerPassword);
@@ -140,7 +140,7 @@ public class BankingService {
     // Can either retun the customer (which will contain the new account)
     // or just the new account (ERD has customer).
     public Customer openCustomerAccount(int customerId, String accountType, int accountNumber, int openingBalance, String sortCode, String customerPassword) {
-        
+
         /*
         this.customerID = customerID;
         this.accountType = accountType;
@@ -148,8 +148,13 @@ public class BankingService {
         openingBalance = balance;
         this.sortCode = sortCode;
         this.customerPassword = customerPassword;
-        */
+         */
         
+        // We need to add the 'newAccount' to the customer
+        //bankServiceAccount.add(newAccount);
+        
+        // return bankService;
+
         
         Account newAccount = new Account(accountNumber, openingBalance, accountType, sortCode);
 
@@ -157,24 +162,24 @@ public class BankingService {
         if (customer != null) {
             customer.getAccountsList().add(newAccount);
         }
-                
-        
-        
-        //bankServiceAccount.add(newAccount);
 
         return customer;
-    }    
+    }  
     
     // Close Customer Account.
-    public List<Account> closeCustomerAccount(int customerID, int accountNumber, String customerPassword) {
+    // Return only the customer who closed the account. 
+    public Customer closeCustomerAccount(int customerId, int accountNumber, String customerPassword) {
         
         /*
         this.customerID = customerID;
         this.accountNumber = accountNumber;        
         this.customerPassword = customerPassword;
         */
-
+       
         // Get Account to be deleted.
+        // All of the customers accounts are not contained within the 'bankServiceAccount'
+        // they are within the bankService under each customer's 'accountsList'.
+        /*
         for (int i = 0; i < bankServiceAccount.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword) && bankServiceAccount.get(i).getBalance() == 0) {
                 bankServiceAccount.remove(bankServiceAccount.get(i));
@@ -184,18 +189,26 @@ public class BankingService {
                 System.out.println("There are still funds in your account. Please arrange for these funds to be transferred. There must be no funds in the account in order to close it.");
             }
         }
+        */
+        Customer customer = checkSecurityDetials(customerId, customerPassword);
+        if (customer != null) {
+            customer.closeAccount(accountNumber);
+        }
 
-        return bankServiceAccount;
+        return customer;
     }
     
     // Get Customer Details.
-    public List<Customer> getCustomerDetails(int customerID, String customerPassword) {
+    // Return only the requested customer. 
+    public Customer getCustomerDetails(int customerId, String customerPassword) {
         
+       
         /*
         this.customerID = customerID;
         this.customerPassword = customerPassword;
         */
 
+        /*
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
                 
@@ -212,14 +225,21 @@ public class BankingService {
         }
 
         return bankService;
+        */
+        
+        Customer customer = checkSecurityDetials(customerId, customerPassword);
+        return customer;
     }
     
     // Get Customer Accounts.
     public List<Account> getCustomerAccounts(int customerID, String customerPassword) {
         
+        /*
         this.customerID = customerID;
         this.customerPassword = customerPassword;
-
+        */
+        
+        /*
         // Get Accounts.
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
@@ -230,8 +250,17 @@ public class BankingService {
                 System.out.println("This customer has no accounts set up.");
             }
         }
+        */
+        
+        
+        List<Account> customerAccountList = null;
+        
+        Customer customer = checkSecurityDetials(customerID, customerPassword);
+        if (customer != null) {
+            customerAccountList = customer.getAllCustomerAccounts();
+        }
 
-        return accountList;
+        return customerAccountList;
     }    
     
     

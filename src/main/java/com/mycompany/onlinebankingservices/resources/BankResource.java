@@ -65,9 +65,10 @@ public class BankResource {
         return customer;
     }
 
+    
     // Update customer details (JSON).
     @PUT
-    @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}")
+    @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateCustomerDetailsJSON(@PathParam("customerID") int customerID, @PathParam("newFirstName") String newFirstName, @PathParam("newSecondName") String newSecondName, @PathParam("newEmailAddress") String newEmailAddress, @PathParam("newCustomerPassword") String newCustomerPassword, @PathParam("oldCustomerPassword") String oldCustomerPassword) {
 
@@ -78,7 +79,7 @@ public class BankResource {
 
     // Update customer details (XML).
     @PUT
-    @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}")
+    @Path("/updatecustomerdetails/{customerID}/{newFirstName}/{newSecondName}/{newEmailAddress}/{newCustomerPassword}/{oldCustomerPassword}")
     @Produces(MediaType.APPLICATION_XML)
     public Customer updateCustomerDetailsXML(@PathParam("customerID") int customerID, @PathParam("newFirstName") String newFirstName, @PathParam("newSecondName") String newSecondName, @PathParam("newEmailAddress") String newEmailAddress, @PathParam("newCustomerPassword") String newCustomerPassword, @PathParam("oldCustomerPassword") String oldCustomerPassword) {
 
