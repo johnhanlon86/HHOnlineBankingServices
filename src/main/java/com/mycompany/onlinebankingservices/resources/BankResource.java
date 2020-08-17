@@ -152,6 +152,26 @@ public class BankResource {
         return customer;
     }
 
+    // Get customer details (JSON).
+    @GET
+    @Path("/getcustomerdetails/{customerId}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCustomerDetailsJSON(@PathParam("customerID") int customerId, @PathParam("customerPassword") String customerPassword) {
+        
+        Gson gson = new Gson();
+        Customer customer = bankService.getCustomerDetails(customerId, customerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
+    }
+    
+    // Get customer details (XML).
+    @GET
+    @Path("/getcustomerdetails/{customerId}/{customerPassword}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Customer getCustomerDetailsXML(@PathParam("customerID") int customerId, @PathParam("customerPassword") String customerPassword) {
+        Customer customer = bankService.getCustomerDetails(customerId, customerPassword);
+        return customer;
+    }
+
     // ******** ACCOUNT *******
     // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
     // http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe
