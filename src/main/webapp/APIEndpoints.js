@@ -70,6 +70,14 @@ axios.get('http://localhost:49000/api/bank/getaccountdetails/0/41324/darylhowe')
 });
 }
 
+function viewDaryls83232AccountBalance() {
+axios.get('http://localhost:49000/api/bank/getaccountbalance/0/83232/darylhowe').then(resp => {
+    document.getElementById('people').innerHTML = 
+            '<div> Balance: $' + resp.data + '</div>'  
+});
+}
+
+
 function viewDarylAccountHistory83232() {
 
 axios.get('http://localhost:49000/api/bank/getaccounthistory/0/83232/darylhowe')
@@ -96,6 +104,27 @@ axios.get('http://localhost:49000/api/bank/getaccounthistory/0/83232/darylhowe')
                             });
 }
 
+function viewDarylsAccounts() {
+
+axios.get('http://localhost:49000/api/bank/getcustomeraccounts/0/darylhowe')
+                    .then(function (response) {
+                    document.getElementById('people').innerHTML = response.data.map(function (account) {
+                    return (
+                            '<div class = "customerContainer">' +
+                            '<div> Account Name: ' + account.accountName + '</div>' +
+                            '<div> Account Number: ' + account.accountNumber + '</div>' + 
+                            '<div> Sort Code: ' + account.sortCode + '</div>' +
+                            '<div> Account Type: ' + account.accountType + '</div>' + 
+                            '<div> Balance: ' + account.balance + '</div>'  +
+                            '<div> -------------------------------- </div>' +
+                            '</div>'
+                            );
+                            }).join('');
+                            })
+                            .catch(function (err) {
+                            document.getElementById('people').innerHTML = '<li class="text-danger">' + err.message + '</li>';
+                            });
+}
 
 
 
