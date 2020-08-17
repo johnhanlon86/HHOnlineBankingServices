@@ -11,7 +11,11 @@ import org.jvnet.hk2.annotations.Service;
 public class BankingService {
 
     public static List<Customer> bankService = new ArrayList<>();
-    public static List<Account> bankServiceAccount = new ArrayList<>();
+    
+     public static List<Account> bankServiceAccount = new ArrayList<>();
+    
+    // There variable are not needed as they are already contained within
+    // the 'Customer' and 'Account' class. 
     
     String firstName;
     String secondName;
@@ -31,6 +35,7 @@ public class BankingService {
     int openingBalance;
     String sortCode;
     List<Account> accountList = null;
+    
 
     public List<Customer> createPastCustomers() {
 
@@ -63,45 +68,60 @@ public class BankingService {
     }
 
     // Create New Customer (Including Location).
-    public List<Customer> createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword, String locationAddress) {
-        
+    // Only return the newly created customer 
+    public Customer createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword, String locationAddress) {
+
+        /*
         this.firstName = firstName;
         this.secondName = secondName;
         this.emailAddress = emailAddress;
         this.customerPassword = customerPassword;
         this.locationAddress = locationAddress;
-
+         */
         Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword, locationAddress);
-
         bankService.add(newCustomer);
 
-        return bankService;
+        return newCustomer;
     }
     
     // Create New Customer (Without Location).
-    public List<Customer> createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword) {
-        
+    // Only return the newly created customer 
+    public Customer createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword) {
+
+        /*
         this.firstName = firstName;
         this.secondName = secondName;
         this.emailAddress = emailAddress;
         this.customerPassword = customerPassword;
-
+         */
+        
         Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword);
-
         bankService.add(newCustomer);
-
-        return bankService;
-    }    
+        return newCustomer;
+    } 
     
     // Update Customer Details.
-    public List<Customer> updateCustomerDetails(int customerID, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword) {
-        
+    // Only return the newly created customer 
+    public Customer updateCustomerDetails(int customerId, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword, String oldCustomerPassword) {
+
+        Customer theCustomer = checkSecurityDetials(customerId, oldCustomerPassword);
+       
+        if (theCustomer != null) {
+            theCustomer.setFirstName(newFirstName);
+            theCustomer.setSecondName(newSecondName);
+            theCustomer.setEmailAddress(newEmailAddress);
+            theCustomer.setPassword(newCustomerPassword);
+        }
+
+        /*
         this.customerID = customerID;
         this.newFirstName = newFirstName;
         this.newSecondName = newSecondName;
         this.emailAddress = newEmailAddress;
         this.customerPassword = newCustomerPassword;
-
+         */
+        
+        /*
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
                 bankService.get(i).setFirstName(newFirstName);
@@ -111,33 +131,48 @@ public class BankingService {
                 break;
             }
         }
+        */
 
-        return bankService;
+        return theCustomer;
     }
     
     // Open Customer Account.
-    public List<Account> openCustomerAccount(int customerID, String accountType, int accountNumber, int balance, String sortCode, String customerPassword) {
+    // Can either retun the customer (which will contain the new account)
+    // or just the new account (ERD has customer).
+    public Customer openCustomerAccount(int customerId, String accountType, int accountNumber, int openingBalance, String sortCode, String customerPassword) {
         
+        /*
         this.customerID = customerID;
         this.accountType = accountType;
         this.accountNumber = accountNumber;        
         openingBalance = balance;
         this.sortCode = sortCode;
         this.customerPassword = customerPassword;
-
+        */
+        
+        
         Account newAccount = new Account(accountNumber, openingBalance, accountType, sortCode);
 
-        bankServiceAccount.add(newAccount);
+        Customer customer = checkSecurityDetials(customerId, customerPassword);
+        if (customer != null) {
+            customer.getAccountsList().add(newAccount);
+        }
+                
+        
+        
+        //bankServiceAccount.add(newAccount);
 
-        return bankServiceAccount;
+        return customer;
     }    
     
     // Close Customer Account.
     public List<Account> closeCustomerAccount(int customerID, int accountNumber, String customerPassword) {
         
+        /*
         this.customerID = customerID;
         this.accountNumber = accountNumber;        
         this.customerPassword = customerPassword;
+        */
 
         // Get Account to be deleted.
         for (int i = 0; i < bankServiceAccount.size(); i++) {
@@ -156,8 +191,10 @@ public class BankingService {
     // Get Customer Details.
     public List<Customer> getCustomerDetails(int customerID, String customerPassword) {
         
+        /*
         this.customerID = customerID;
         this.customerPassword = customerPassword;
+        */
 
         for (int i = 0; i < bankService.size(); i++) {
             if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
