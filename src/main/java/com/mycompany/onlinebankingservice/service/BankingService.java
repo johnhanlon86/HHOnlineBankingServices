@@ -11,31 +11,6 @@ import org.jvnet.hk2.annotations.Service;
 public class BankingService {
 
     public static List<Customer> bankService = new ArrayList<>();
-    
-     public static List<Account> bankServiceAccount = new ArrayList<>();
-    
-    // There variable are not needed as they are already contained within
-    // the 'Customer' and 'Account' class. 
-    
-    String firstName;
-    String secondName;
-    String emailAddress;
-    String customerPassword;
-    String locationAddress;
-    
-    int customerID;
-    String newFirstName;
-    String newSecondName;
-    String newEmailAddress;
-    String newCustomerPassword;
-    
-    String accountType;
-    int accountNumber;
-    int balance;
-    int openingBalance;
-    String sortCode;
-    List<Account> accountList = null;
-    
 
     public List<Customer> createPastCustomers() {
 
@@ -71,50 +46,30 @@ public class BankingService {
 
         return bankService;
     }
-    
+
     public List<Customer> getBankingService() {
         return bankService;
     }
 
-    // Create New Customer (Including Location).
-    // Only return the newly created customer 
     public Customer createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword, String locationAddress) {
 
-        /*
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.emailAddress = emailAddress;
-        this.customerPassword = customerPassword;
-        this.locationAddress = locationAddress;
-         */
         Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword, locationAddress);
         bankService.add(newCustomer);
 
         return newCustomer;
     }
-    
-    // Create New Customer (Without Location).
-    // Only return the newly created customer 
+
     public Customer createNewCustomer(String firstName, String secondName, String emailAddress, String customerPassword) {
 
-        /*
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.emailAddress = emailAddress;
-        this.customerPassword = customerPassword;
-         */
-        
         Customer newCustomer = new Customer(firstName, secondName, emailAddress, customerPassword);
         bankService.add(newCustomer);
         return newCustomer;
-    } 
-    
-    // Update Customer Details.
-    // Only return the updated customer .
+    }
+
     public Customer updateCustomerDetails(int customerId, String newFirstName, String newSecondName, String newEmailAddress, String newCustomerPassword, String oldCustomerPassword) {
 
         Customer theCustomer = checkSecurityDetials(customerId, oldCustomerPassword);
-       
+
         if (theCustomer != null) {
             theCustomer.setFirstName(newFirstName);
             theCustomer.setSecondName(newSecondName);
@@ -122,49 +77,11 @@ public class BankingService {
             theCustomer.setPassword(newCustomerPassword);
         }
 
-        /*
-        this.customerID = customerID;
-        this.newFirstName = newFirstName;
-        this.newSecondName = newSecondName;
-        this.emailAddress = newEmailAddress;
-        this.customerPassword = newCustomerPassword;
-         */
-        
-        /*
-        for (int i = 0; i < bankService.size(); i++) {
-            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
-                bankService.get(i).setFirstName(newFirstName);
-                bankService.get(i).setSecondName(newSecondName);
-                bankService.get(i).setEmailAddress(newEmailAddress);
-                bankService.get(i).setPassword(newCustomerPassword);
-                break;
-            }
-        }
-        */
-
         return theCustomer;
     }
-    
-    // Open Customer Account.
-    // Can either retun the customer (which will contain the new account)
-    // or just the new account (ERD has customer).
+
     public Customer openCustomerAccount(int customerId, String accountType, int accountNumber, int openingBalance, String sortCode, String customerPassword) {
 
-        /*
-        this.customerID = customerID;
-        this.accountType = accountType;
-        this.accountNumber = accountNumber;        
-        openingBalance = balance;
-        this.sortCode = sortCode;
-        this.customerPassword = customerPassword;
-         */
-        
-        // We need to add the 'newAccount' to the customer
-        //bankServiceAccount.add(newAccount);
-        
-        // return bankService;
-
-        
         Account newAccount = new Account(accountNumber, openingBalance, accountType, sortCode);
 
         Customer customer = checkSecurityDetials(customerId, customerPassword);
@@ -173,32 +90,10 @@ public class BankingService {
         }
 
         return customer;
-    }  
-    
-    // Close Customer Account.
-    // Return only the customer who closed the account. 
+    }
+
     public Customer closeCustomerAccount(int customerId, int accountNumber, String customerPassword) {
-        
-        /*
-        this.customerID = customerID;
-        this.accountNumber = accountNumber;        
-        this.customerPassword = customerPassword;
-        */
-       
-        // Get Account to be deleted.
-        // All of the customers accounts are not contained within the 'bankServiceAccount'
-        // they are within the bankService under each customer's 'accountsList'.
-        /*
-        for (int i = 0; i < bankServiceAccount.size(); i++) {
-            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword) && bankServiceAccount.get(i).getBalance() == 0) {
-                bankServiceAccount.remove(bankServiceAccount.get(i));
-                System.out.println("Account closed. Thank you for banking with Howe Hanlon.");
-                break;
-            } else {
-                System.out.println("There are still funds in your account. Please arrange for these funds to be transferred. There must be no funds in the account in order to close it.");
-            }
-        }
-        */
+
         Customer customer = checkSecurityDetials(customerId, customerPassword);
         if (customer != null) {
             customer.closeAccount(accountNumber);
@@ -206,74 +101,25 @@ public class BankingService {
 
         return customer;
     }
-    
-    // Get Customer Details.
-    // Return only the requested customer. 
+
     public Customer getCustomerDetails(int customerId, String customerPassword) {
-        
-       
-        /*
-        this.customerID = customerID;
-        this.customerPassword = customerPassword;
-        */
 
-        /*
-        for (int i = 0; i < bankService.size(); i++) {
-            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
-                
-                firstName = bankService.get(i).getFirstName();
-                secondName = bankService.get(i).getSecondName();
-                emailAddress = bankService.get(i).getEmailAddress();
-                
-                System.out.println(firstName);
-                System.out.println(secondName);
-                System.out.println(emailAddress);
-
-                break;
-            }
-        }
-
-        return bankService;
-        */
-        
         Customer customer = checkSecurityDetials(customerId, customerPassword);
         return customer;
     }
-    
-    // Get Customer Accounts.
+
     public List<Account> getCustomerAccounts(int customerID, String customerPassword) {
-        
-        /*
-        this.customerID = customerID;
-        this.customerPassword = customerPassword;
-        */
-        
-        /*
-        // Get Accounts.
-        for (int i = 0; i < bankService.size(); i++) {
-            if (bankService.get(i).getCustomerID() == customerID && bankService.get(i).getPassword().equals(customerPassword)) {
-                accountList = bankService.get(i).getAllCustomerAccounts();
-                System.out.println("Account " + accountList + " found.");
-                break;
-            } else {
-                System.out.println("This customer has no accounts set up.");
-            }
-        }
-        */
-        
-        
+
         List<Account> customerAccountList = null;
-        
+
         Customer customer = checkSecurityDetials(customerID, customerPassword);
         if (customer != null) {
             customerAccountList = customer.getAllCustomerAccounts();
         }
 
         return customerAccountList;
-    }    
-    
-    
-    
+    }
+
     // ******** SECURITY *******
     /**
      * A method to check a customers security details.
@@ -301,11 +147,7 @@ public class BankingService {
         }
         return theCustomer;
     }
-    
-   
-    
 
-    
     // ******** ACCOUNT *******
     public Account getAccountDetails(int customerId, int accountNumber, String customerPassword) {
 
@@ -319,7 +161,6 @@ public class BankingService {
         return account;
     }
 
-    // THIS RETURNS 0 EVEN IF PASSWORD IS INCORRECT?
     public double getAccountBalance(int customerId, int accountNumber, String customerPassword) {
 
         double balance = 0;
@@ -382,7 +223,7 @@ public class BankingService {
         }
         return transaction;
     }
-    
+
     public List<Transaction> transfer(int accountNumberSender, int accountNumberReciever, double transferAmount, int customerIdSender, int customerIdReciever, String customerPasswordSender, String description) {
 
         Customer theSenderCustomer = checkSecurityDetials(customerIdSender, customerPasswordSender);
@@ -394,7 +235,7 @@ public class BankingService {
 
             // If there is a customer with the matched 'customerIdReciever'..
             if (bankService.get(i).getCustomerID() == customerIdReciever) {
-                
+
                 // Attempt to make withdraw, the transaction will have 'Successful' or 'Failed' status.
                 transaction = senderAccount.withdraw(transferAmount, description);
 
@@ -424,9 +265,7 @@ public class BankingService {
         return accountHistory;
     }
 
-   // ******** TRANSACTION *******
-
-    
+    // ******** TRANSACTION *******
     public Transaction getTransactionById(int customerId, int accountNumber, String customerPassword, String transactionId) {
 
         Transaction transaction = null;

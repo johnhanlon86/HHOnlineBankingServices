@@ -4,53 +4,31 @@ import java.util.ArrayList;
 
 public class Account {
 
-    // No need to have a customerId in the account class.
-    // private int customerID;
-    //private String transactionType;
-    //private double transactionAmount;
-    //private String description;
-    //private int senderAccountNumber;
-    //private int receiverAccountNumber;
-    
-    // Perhaps we should assign accountNumbers automatically? Reduces chance of
-    // duplicate account numbers between customers.
     private int accountNumber;
     private double balance;
     private String accountType;
     private String sortCode;
-    
-// ** ADD TO ERD **
     private String accountName = "General";
     private ArrayList<Transaction> transactionList = new ArrayList<>();
-    
 
-
-    public Account(){
+    public Account() {
     }
-    
-    // ** ADD TO ERD - allows customers to add a name to the account - eg "Savings", "Spending" etc
+
     public Account(int accountNumber, double openingBalance, String accountType, String sortCode, String accountName) {
-        // this.customerID = customerID;
         this.accountNumber = accountNumber;
         this.balance = openingBalance;
         this.accountType = accountType;
         this.sortCode = sortCode;
         this.accountName = accountName;
     }
-    
-    // No need to have a customerId in the account class ->
-    // The customer will have an account. The account has an accountNumber.
-    // The customer has a customerID. 
+
     public Account(int accountNumber, double openingBalance, String accountType, String sortCode) {
-        // this.customerID = customerID;
         this.accountNumber = accountNumber;
         this.balance = openingBalance;
         this.accountType = accountType;
         this.sortCode = sortCode;
     }
-    
-  
-    // ** NEW METHOD - ADD to ERD **
+
     public Transaction deposit(double depositAmount, String description) {
 
         Transaction transaction = new Transaction(accountType, balance, description);
@@ -59,7 +37,6 @@ public class Account {
         return transaction;
     }
 
-    // ** NEW METHOD - ADD to ERD **
     public Transaction withdraw(double withdrawAmount, String description) {
 
         Transaction transaction = new Transaction(accountType, balance, description);
@@ -67,56 +44,7 @@ public class Account {
         transactionList.add(transaction);
         return transaction;
     }
-    
-    /*
-    // No need to pass a transaction object into ().
-    // Create within the method instead.
-    public Transaction makeTransaction(String transactionType, double transactionAmount, String description) {
 
-        // These belong to the 'Transaction' class and are there already as instance
-        // variables.
-        //this.transactionType = transactionType;
-        //this.transactionAmount = transactionAmount;
-        //this.description = description;
-        Transaction transaction = null;
-
-        if (transactionType.equalsIgnoreCase("Deposit")) {
-            transaction = new Transaction(accountType, balance, description);
-            balance = transaction.deposit(transactionAmount);
-            transactionList.add(transaction);
-        }
-
-        if (transactionType.equalsIgnoreCase("Withdraw")) {
-            transaction = new Transaction(accountType, balance, description);
-            balance = transaction.withdraw(transactionAmount);
-            transactionList.add(transaction);
-        }
-
-        return transaction;
-    }
-    */
-
-    /*
-    // This functionality was added into the 'BankService' class instead when
-    // we talked on Friday. Apologies (must have forgotten to remove from this
-    // class)! 
-       
-    public Transaction makeTransfer(String transactionType, double transactionAmount, String description, int senderAccountNumber, int receiverAccountNumber) {
-        this.transactionType = transactionType;
-        this.transactionAmount = transactionAmount;
-        this.description = description;
-        this.senderAccountNumber = senderAccountNumber;
-        this.receiverAccountNumber = receiverAccountNumber;
-
-        Transaction transaction = null;
-
-        //transactionList.add(transaction);
-        // Transaction transaction = null;
-        // LOGIC here
-        return transaction;
-    }
-     */
-    // ** New method - Add to ERD diagram. ** 
     public boolean isBalanceZero() {
         boolean isZero = false;
         if (balance == 0) {
@@ -124,8 +52,7 @@ public class Account {
         }
         return isZero;
     }
-    
-    // ** NEW METHOD - Add to ERD ** 
+
     public Transaction getTransactionByIndex(int index) {
 
         Transaction transaction = null;
@@ -138,7 +65,6 @@ public class Account {
         return transactionList.get(index);
     }
 
-    // ** NEW METHOD - Add to ERD ** 
     public Transaction getTransactionById(String transactionId) {
 
         Transaction transaction = null;
@@ -190,7 +116,7 @@ public class Account {
     public void setTransactionList(ArrayList<Transaction> transactionList) {
         this.transactionList = transactionList;
     }
-   
+
     public String getAccountName() {
         return accountName;
     }

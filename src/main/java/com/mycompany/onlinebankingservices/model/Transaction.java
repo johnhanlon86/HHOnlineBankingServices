@@ -5,37 +5,19 @@ import java.util.UUID;
 
 public class Transaction {
 
-    // ** Change transationId to type UUID **
     private UUID transactionId;
     private double transactionAmount;
     private Date transactionDate;
     private String description;
-    /*
-    I have changed 'accountType' back to String ->
-    Transaction t1 = new Transaction("Debit", 100);
-    is clearer than ->
-    Transaction t1 = new Transaction(true, 100);
-     */
     private String accountType;
     private double preTransactionBalance;
     private double postTransactionBalance;
-    
-    //** ADD to ERD - Status added **
     private String status;
-    // We could add a success or failed status - on a debit account
-    // a transaction will not go through if there is not enough money in the account.
-    // This could be hard to spot withit a status warning. 
-    
-    //** ADD to ERD - TransactionType added **
     private String transactionType;
-    // We could add a 'transactionType' - it will allow customers to easily see
-    // what transactions are deposits vs withdraws
-    
-    public Transaction(){
+
+    public Transaction() {
     }
-    
-    // ** Added'preTransactionBalance' to the constructors **
-    // ** Removed transactionAmount **
+
     public Transaction(String accountType, double preTransactionBalance) {
         transactionId = UUID.randomUUID();
         this.accountType = accountType;
@@ -43,8 +25,6 @@ public class Transaction {
         transactionDate = new Date();
     }
 
-    // ** Added'preTransactionBalance' to the constructors **
-    // ** Removed transactionAmount **
     public Transaction(String accountType, double preTransactionBalance, String description) {
         transactionId = UUID.randomUUID();
         this.accountType = accountType;
@@ -53,7 +33,6 @@ public class Transaction {
         transactionDate = new Date();
     }
 
-    // ** Changed return accountType to double: postTransactionBalance **
     public double deposit(double depositAmount) {
         transactionAmount = depositAmount;
         postTransactionBalance = preTransactionBalance + depositAmount;
@@ -62,19 +41,18 @@ public class Transaction {
         return postTransactionBalance;
     }
 
-    // ** Changed return accountType to double: postTransactionBalance **
     public double withdraw(double withdrawAmount) {
 
         transactionType = "Withdraw";
 
         if (accountType.equalsIgnoreCase("debit")) {
-            
+
             // Do not let balance go minus
             if (preTransactionBalance >= withdrawAmount) {
                 transactionAmount = withdrawAmount;
                 postTransactionBalance = preTransactionBalance - withdrawAmount;
                 status = "Successful";
-                
+
                 return postTransactionBalance;
             } else {
                 postTransactionBalance = preTransactionBalance;
@@ -91,7 +69,6 @@ public class Transaction {
             status = "Failed";
             return preTransactionBalance;
         }
-        
 
     }
 
@@ -138,7 +115,7 @@ public class Transaction {
     public void setPostTransactionBalance(double postTransactionBalance) {
         this.postTransactionBalance = postTransactionBalance;
     }
-    
+
     public String getStatus() {
         return status;
     }
@@ -146,8 +123,8 @@ public class Transaction {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-   public String getTransactionType() {
+
+    public String getTransactionType() {
         return transactionType;
     }
 
@@ -161,7 +138,7 @@ public class Transaction {
         String transactionDetails = "TransactionId: " + transactionId + "\nTransaction Amount: "
                 + transactionAmount + "\nTransaction Date: " + transactionDate + "\nDescription: "
                 + description + "\nAccount Type: " + accountType + "\nPre-Transaction Balance: "
-                + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance 
+                + preTransactionBalance + "\nPost-Transaction Balance: " + postTransactionBalance
                 + "\nStatus: " + status + "\nTransactionType: " + transactionType;
 
         return transactionDetails;
