@@ -152,6 +152,9 @@ public class BankResource {
         return customer;
     }
 
+    
+    // http://localhost:49000/api/bank/getcustomerdetails/0/darylhowe
+    // http://localhost:49000/api/bank/getcustomerdetails/{customerId}/{customerPassword}
     // Get customer details (JSON).
     @GET
     @Path("/getcustomerdetails/{customerId}/{customerPassword}")
@@ -171,6 +174,8 @@ public class BankResource {
         Customer customer = bankService.getCustomerDetails(customerId, customerPassword);
         return customer;
     }
+    
+    
 
     // ******** ACCOUNT *******
     // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}

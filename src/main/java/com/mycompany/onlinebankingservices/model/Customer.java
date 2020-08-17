@@ -2,8 +2,10 @@ package com.mycompany.onlinebankingservices.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 // import java.lang.Math;
 
+@XmlRootElement
 public class Customer {
 
     // Changed to static and int.

@@ -6,7 +6,7 @@
 
 $(document).ready(function() {
     $.ajax({
-        url: "https://localhost:49000/api/bank/getaccountsortcode/0/41324/darylhowe"
+        url: "http://localhost:49000/api/bank/getaccountsortcode/0/41324/darylhowe"
     }).then(function(data) {
        $('.resp-sortCode').append(data);
        console.log(data)
