@@ -67,6 +67,12 @@ public class Customer {
         Account account = new Account(accountNumber, openingBalance, accountType, sortCode);
         accountsList.add(account);
     }
+    
+    public void openAccount(String accountType, int accountNumber, double openingBalance, String sortCode, String accountName) {
+
+        Account account = new Account(accountNumber, openingBalance, accountType, sortCode, accountName);
+        accountsList.add(account);
+    }
 
     public void closeAccount(int accountNumber) {
 

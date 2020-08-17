@@ -42,6 +42,8 @@ public class BankingService {
         Customer customer01 = new Customer("Daryl", "Howe", "testemail@hotmail.com", "darylhowe");
         customer01.openAccount("Debit", 83232, 1000, "HH1234");
         customer01.openAccount("Credit", 41324, 0, "HH1234");
+        customer01.openAccount("Debit", 99928, 0, "HH1234", "Savings");
+
         customer01.getAccountByAccountNumber(83232).deposit(100, "Savings");
         customer01.getAccountByAccountNumber(83232).deposit(200, "Birthday Money");
         customer01.getAccountByAccountNumber(83232).deposit(1500, "Wages");
@@ -49,6 +51,9 @@ public class BankingService {
         customer01.getAccountByAccountNumber(41324).withdraw(2500, "Holiday Security Deposit");
         customer01.getAccountByAccountNumber(41324).deposit(500, "Holiday Payement");
         customer01.getAccountByAccountNumber(41324).deposit(500, "Holiday Payement");
+        customer01.getAccountByAccountNumber(99928).deposit(100, "Monthly Saving");
+        customer01.getAccountByAccountNumber(99928).deposit(100, "Monthly Saving");
+        customer01.getAccountByAccountNumber(99928).deposit(100, "Monthly Saving");
 
         Customer customer02 = new Customer("Alex", "Jackson", "mj@gmail.com", "alexjackson");
         customer02.openAccount("Credit", 99943, 50_000, "HH1234");

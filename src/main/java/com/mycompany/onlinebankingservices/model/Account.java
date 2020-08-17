@@ -18,9 +18,24 @@ public class Account {
     private double balance;
     private String accountType;
     private String sortCode;
+    
+// ** ADD TO ERD **
+    private String accountName = "General";
     private ArrayList<Transaction> transactionList = new ArrayList<>();
+    
+
 
     public Account(){
+    }
+    
+    // ** ADD TO ERD - allows customers to add a name to the account - eg "Savings", "Spending" etc
+    public Account(int accountNumber, double openingBalance, String accountType, String sortCode, String accountName) {
+        // this.customerID = customerID;
+        this.accountNumber = accountNumber;
+        this.balance = openingBalance;
+        this.accountType = accountType;
+        this.sortCode = sortCode;
+        this.accountName = accountName;
     }
     
     // No need to have a customerId in the account class ->
@@ -33,6 +48,7 @@ public class Account {
         this.accountType = accountType;
         this.sortCode = sortCode;
     }
+    
   
     // ** NEW METHOD - ADD to ERD **
     public Transaction deposit(double depositAmount, String description) {
@@ -174,13 +190,21 @@ public class Account {
     public void setTransactionList(ArrayList<Transaction> transactionList) {
         this.transactionList = transactionList;
     }
+   
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
 
     @Override
     public String toString() {
         String accountDetails
                 = "\nAccount Number: " + accountNumber + "\nBalance: "
                 + balance + "\nAccountType: " + accountType + "\nSortCode: "
-                + sortCode;
+                + sortCode + "\nAccountName: " + accountName;
 
         return accountDetails;
     }
