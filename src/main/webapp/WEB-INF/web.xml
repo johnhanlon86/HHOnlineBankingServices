@@ -9,8 +9,9 @@
         </session-timeout>
     </session-config>
         
-        <!--
-    <servlet>
+        
+       
+       <servlet>
         <servlet-name>rest</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
@@ -18,8 +19,7 @@
             <param-value>com.mycompany.onlinebankingservices</param-value>
         </init-param>
     </servlet>
-        -->
-<!--    
+
 <servlet>
     <servlet-name>Gateway Servlet</servlet-name>
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
@@ -29,12 +29,14 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
 </servlet>
--->
 
    
     <servlet-mapping>
         <servlet-name>rest</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+
+
+
     
 </web-app>

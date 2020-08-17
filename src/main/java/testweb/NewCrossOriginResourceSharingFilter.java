@@ -5,23 +5,33 @@
  */
 package testweb;
 
+import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.ext.Provider;
+import org.glassfish.jersey.server.ContainerRequest;
+import org.glassfish.jersey.server.ContainerResponse;
 
 /**
  *
  * @author darylhowe
  */
-@Provider
+
+
 public class NewCrossOriginResourceSharingFilter implements ContainerResponseFilter {
 
-    @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
-        response.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
-        response.getHeaders().putSingle("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
-        response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
+    public ContainerResponse filter(ContainerRequest creq, ContainerResponse cresp) {
+
+        cresp.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
+        cresp.getHeaders().putSingle("Access-Control-Allow-Credentials", "true");
+        cresp.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        cresp.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type, Accept");
+
+        return cresp;
     }
-    
+
+    @Override
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
