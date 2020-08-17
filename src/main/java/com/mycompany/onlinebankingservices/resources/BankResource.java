@@ -45,6 +45,9 @@ public class BankResource {
     // ******** CUSTOMER *******
     
     // Create new customer (JSON).
+    // http://localhost:49000/api/bank/createnewcustomer/Carl/Rodgers/carl@gmail.com/carlrodgers
+    // http://localhost:49000/api/bank/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}
+
     @POST
     @Path("/createnewcustomer/{firstName}/{secondName}/{emailAddress}/{customerPassword}")
     @Produces(MediaType.APPLICATION_JSON)
