@@ -71,6 +71,10 @@ public class BankingService {
 
         return bankService;
     }
+    
+    public List<Customer> getBankingService() {
+        return bankService;
+    }
 
     // Create New Customer (Including Location).
     // Only return the newly created customer 

@@ -41,6 +41,19 @@ public class BankResource {
         List<Customer> customersList = bankService.createPastCustomers();
         return Response.status(Response.Status.CREATED).entity(gson.toJson(customersList)).build();
     }
+
+    // http://localhost:49000/api/bank    
+    // This returns the entire list of customer - used for testing. 
+    @GET
+    @Path("")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createBankService() {
+
+        Gson gson = new Gson();
+        List<Customer> customersList = bankService.getBankingService();
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(customersList)).build();
+    }
+    
     
     
     // ******** CUSTOMER *******
