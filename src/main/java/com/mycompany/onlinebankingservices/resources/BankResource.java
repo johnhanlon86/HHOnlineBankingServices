@@ -92,7 +92,26 @@ public class BankResource {
         return customer;
     }
     
+    // Open customer account (JSON).
+    @PUT
+    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{newCustomerPassword}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response openCustomerAccountJSON(@PathParam("customerID") int customerID, @PathParam("accountType") String accountType, @PathParam("accountNumber") int accountNumber, @PathParam("openingBalance") int openingBalance, @PathParam("sortCode") String sortCode, @PathParam("customerPassword") String customerPassword) {
 
+        Gson gson = new Gson();
+        Customer customer = bankService.openCustomerAccount(customerID, accountType, accountNumber, openingBalance, sortCode, customerPassword);
+        return Response.status(Response.Status.CREATED).entity(gson.toJson(customer)).build();
+    }
+
+    // Open customer account (XML).
+    @PUT
+    @Path("/opencustomeraccount/{customerID}/{accountType}/{accountNumber}/{openingBalance}/{sortCode}/{newCustomerPassword}")
+    @Produces(MediaType.APPLICATION_XML)
+    public Customer openCustomerAccountXML(@PathParam("customerID") int customerID, @PathParam("accountType") String accountType, @PathParam("accountNumber") int accountNumber, @PathParam("openingBalance") int openingBalance, @PathParam("sortCode") String sortCode, @PathParam("customerPassword") String customerPassword) {
+
+        Customer customer = bankService.openCustomerAccount(customerID, accountType, accountNumber, openingBalance, sortCode, customerPassword);
+        return customer;
+    }
 
     // ******** ACCOUNT *******
     // http://localhost:49000/api/bank/getaccountdetails/{customerId}/{accountNumber}/{customerPassword}
